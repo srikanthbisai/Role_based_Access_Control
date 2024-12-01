@@ -1,0 +1,89 @@
+{
+  "permissions": [
+    {
+      "id": "2",
+      "name": "Write"
+    },
+    {
+      "id": "3",
+      "name": "Execute"
+    },
+    {
+      "id": "4411",
+      "name": "Read"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "permissions": [
+        "Read",
+        "Write"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Symphony",
+      "permissions": [
+        "Read",
+        "Execute",
+        "Write"
+      ]
+    },
+    {
+      "id": "20c4",
+      "name": "Super Admin",
+      "permissions": [
+        "Write",
+        "Execute",
+        "Read"
+      ]
+    },
+    {
+      "id": "166c",
+      "name": "Clerk",
+      "permissions": [
+        "Read"
+      ]
+    },
+    {
+      "id": "0961",
+      "name": "Super Officer",
+      "permissions": [
+        "Execute",
+        "Read"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Alice",
+      "role": "Admin",
+      "status": "Active",
+      "email": "Alice@gmail.com"
+    },
+    {
+      "id": "3738",
+      "name": "John Doe",
+      "role": "User",
+      "status": "Active",
+      "email": "JohnDoe213@yahoo.com"
+    },
+    {
+      "id": "d9ed",
+      "name": "Patrickson",
+      "role": "nkl",
+      "status": "Active",
+      "email": "Patrick213@yahoo.com"
+    },
+    {
+      "id": "6702",
+      "name": "Richard",
+      "email": "richo@gmail.com",
+      "role": "User",
+      "status": "Active"
+    }
+  ]
+}
