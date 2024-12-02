@@ -148,31 +148,14 @@ const useUserManagement = () => {
   const filteredUsers = users.filter((user) => {
     const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = selectedRole ? user.role === selectedRole : true;
-
     return matchesSearch && matchesRole;
   });
 
+
+
   return {
-    users,
-    roles,
-    editingUser,
-    newUser,
-    loading,
-    error,
-    showDialog,
-    searchQuery,
-    selectedRole,
-    filteredUsers,
-    setSearchQuery,
-    setSelectedRole,
-    setNewUser,
-    setShowDialog,
-    toggleUserStatus,
-    handleAddUser,
-    handleUpdateUser,
-    handleDeleteUser,
-    handleEditClick,
-    setEditingUser
+    users,roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
+    setShowDialog,  toggleUserStatus,  handleAddUser,  handleUpdateUser,  handleDeleteUser, handleEditClick,  setEditingUser
   };
 };
 

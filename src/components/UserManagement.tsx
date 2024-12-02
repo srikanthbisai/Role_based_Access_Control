@@ -9,8 +9,7 @@ import Button from "@mui/material/Button";
 import useUserManagement from "../hooks/useUserManagement";
 
 const UserManagement: React.FC = () => {
-  const {
-    roles,editingUser,newUser,loading, error,showDialog, searchQuery, selectedRole, filteredUsers,setSearchQuery, setSelectedRole, setNewUser, setShowDialog, toggleUserStatus, handleAddUser, setEditingUser, handleUpdateUser, handleDeleteUser, handleEditClick,
+  const { roles, editingUser, newUser, loading, error, showDialog, searchQuery, selectedRole, filteredUsers, setSearchQuery, setSelectedRole, setNewUser, setShowDialog, toggleUserStatus, handleAddUser, setEditingUser,  handleUpdateUser,  handleDeleteUser,  handleEditClick,
   } = useUserManagement();
 
   return (
@@ -50,66 +49,85 @@ const UserManagement: React.FC = () => {
 
       {/* User List */}
       <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-gray-100 font-serif text-xl">
-            <th className="py-2 px-4 text-left">Name</th>
-            <th className="py-2 px-4 text-left">Email</th>
-            <th className="py-2 px-4 text-left">Status</th>
-            <th className="py-2 px-4 text-left">Role</th>
-            <th className="py-2 px-4 text-left">Activity</th>
-            <th className="py-2 px-4 text-left">Edit</th>
-            <th className="py-2 px-4 text-left">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.map((user) => (
-            <tr key={user.id} className="hover:bg-gray-50 transition-colors border-b font-serif text-lg">
-              <td className="py-6 px-4 font-medium text-gray-800">{user.name}</td>
-              <td className="py-6 px-4 text-gray-600">{user.email}</td>
-              <td className="py-6 px-4 text-gray-600">
-                <span className={`${user.status === "Active" ? "text-green-700" : "text-red-500"}`}>
-                  {user.status}
-                </span>
-              </td>
-              <td className="py-6 px-4 text-gray-600">{user.role}</td>
-              <td className="py-6 px-4 text-gray-600">
-                <label className="inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={user.status === "Active"}
-                    onChange={() => toggleUserStatus(user)}
-                    className="hidden"
-                  />
-                  <div className="relative">
-                    <div
-                      className={`w-12 h-6 rounded-full ${user.status === "Active" ? "bg-green-500" : "bg-red-300"}`}
-                    >
-                      <div
-                        className={`w-6 h-6 bg-gray-200 rounded-full transition-all ${
-                          user.status === "Active" ? "transform translate-x-6" : ""
-                        }`}
-                      />
-                    </div>
-                  </div>
-                </label>
-              </td>
-              <td className="py-6 px-4">
-                <button onClick={() => handleEditClick(user)} className="text-blue-500 hover:text-blue-700">
-                  EDIT
-                </button>
-              </td>
-              <td className="py-6 px-4">
-                <button
-                  onClick={() => handleDeleteUser(user.id)}
-                  className="text-purple-400 hover:text-red-700 text-md"
-                >
-                  DELETE
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+  <thead>
+    <tr className="bg-gray-100 font-serif text-xl">
+      <th className="py-2 px-4 text-left">Name</th>
+      <th className="py-2 px-4 text-left">Email</th>
+      <th className="py-2 px-4 text-left hidden lg:table-cell">Status</th>
+      <th className="py-2 px-4 text-left">Role</th>
+      <th className="py-2 px-4 text-left hidden lg:table-cell">Activity</th>
+      <th className="py-2 px-4 text-left">Edit</th>
+      <th className="py-2 px-4 text-left">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredUsers.map((user) => (
+      <tr
+        key={user.id}
+        className="hover:bg-gray-50 transition-colors border-b font-serif text-lg"
+      >
+        <td className="py-6 px-4 font-medium text-gray-800">
+          {user.name}
+        </td>
+        <td className="py-6 px-4 text-gray-600">{user.email}</td>
+        {/* Status column hidden on smaller screens */}
+        <td className="py-6 px-4 text-gray-600 hidden lg:table-cell">
+          <span
+            className={`${
+              user.status === "Active" ? "text-green-700" : "text-red-500"
+            }`}
+          >
+            {user.status}
+          </span>
+        </td>
+        <td className="py-6 px-4 text-gray-600">{user.role}</td>
+        {/* Activity column hidden on smaller screens */}
+        <td className="py-6 px-4 text-gray-600 hidden lg:table-cell">
+          <label className="inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={user.status === "Active"}
+              onChange={() => toggleUserStatus(user)}
+              className="hidden"
+            />
+            <div className="relative">
+              <div
+                className={`w-12 h-6 rounded-full ${
+                  user.status === "Active" ? "bg-green-500" : "bg-red-300"
+                }`}
+              >
+                <div
+                  className={`w-6 h-6 bg-gray-200 rounded-full transition-all ${
+                    user.status === "Active"
+                      ? "transform translate-x-6"
+                      : ""
+                  }`}
+                />
+              </div>
+            </div>
+          </label>
+        </td>
+        <td className="py-6 px-4">
+          <button
+            onClick={() => handleEditClick(user)}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            EDIT
+          </button>
+        </td>
+        <td className="py-6 px-4">
+          <button
+            onClick={() => handleDeleteUser(user.id)}
+            className="text-purple-400 hover:text-red-700 text-md"
+          >
+            DELETE
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
 
       {/* Add/Edit User Dialog */}
       <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
@@ -120,6 +138,8 @@ const UserManagement: React.FC = () => {
               <label>Name</label>
               <input
                 type="text"
+                min={3}
+                max={20}
                 value={editingUser ? editingUser.name : newUser.name}
                 onChange={(e) =>
                   editingUser
@@ -129,10 +149,12 @@ const UserManagement: React.FC = () => {
                 className="border p-2 rounded-md"
               />
             </div>
+
             <div className="flex flex-col">
               <label>Email</label>
               <input
                 type="email"
+                required
                 value={editingUser ? editingUser.email : newUser.email}
                 onChange={(e) =>
                   editingUser
@@ -142,6 +164,7 @@ const UserManagement: React.FC = () => {
                 className="border p-2 rounded-md"
               />
             </div>
+
             <div className="flex flex-col">
               <label>Role</label>
               <select

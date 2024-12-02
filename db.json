@@ -75,17 +75,8 @@
       "permissions": [
         "Write",
         "Read",
-        "Approve"
-      ]
-    },
-    {
-      "id": "b885",
-      "name": "Personal Assistant",
-      "permissions": [
         "Approve",
-        "Read",
-        "Execute",
-        "Write"
+        "Lock Resources"
       ]
     }
   ],
