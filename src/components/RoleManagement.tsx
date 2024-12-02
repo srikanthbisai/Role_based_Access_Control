@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { FaPlus } from "react-icons/fa";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Checkbox, FormControlLabel } from "@mui/material";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RoleManagement: React.FC = () => {
   const [roles, setRoles] = useState<any[]>([]);
@@ -7,7 +11,7 @@ const RoleManagement: React.FC = () => {
   const [newRole, setNewRole] = useState<Partial<any>>({ name: "", permissions: [] });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [showDialog, setShowDialog] = useState(false); // Manage dialog visibility
+  const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +40,7 @@ const RoleManagement: React.FC = () => {
 
   const handleAddRole = async () => {
     if (!newRole.name?.trim()) {
-      setError("Role name is required");
+      toast.error("Role name is required");
       return;
     }
 
@@ -53,10 +57,10 @@ const RoleManagement: React.FC = () => {
       const addedRole = await response.json();
       setRoles((prev) => [...prev, addedRole]);
       setNewRole({ name: "", permissions: [] });
-      setError("");
+      toast.success("Role added successfully!");
       setShowDialog(false); // Close dialog after adding role
     } catch (err: any) {
-      setError(err.message || "An error occurred while adding the role");
+      toast.error(err.message || "An error occurred while adding the role");
     } finally {
       setLoading(false);
     }
@@ -79,11 +83,11 @@ const RoleManagement: React.FC = () => {
       setRoles((prev) =>
         prev.map((role) => (role.id === updatedRole.id ? updatedRole : role))
       );
+      toast.success("Role updated successfully!");
       setEditingRole(null);
-      setError("");
       setShowDialog(false); // Close dialog after updating role
     } catch (err: any) {
-      setError(err.message || "An error occurred while updating the role");
+      toast.error(err.message || "An error occurred while updating the role");
     } finally {
       setLoading(false);
     }
@@ -99,8 +103,9 @@ const RoleManagement: React.FC = () => {
       if (!response.ok) throw new Error("Failed to delete role");
 
       setRoles((prev) => prev.filter((role) => role.id !== id));
+      toast.success("Role deleted successfully!");
     } catch (err: any) {
-      setError(err.message || "An error occurred while deleting the role");
+      toast.error(err.message || "An error occurred while deleting the role");
     } finally {
       setLoading(false);
     }
@@ -108,19 +113,21 @@ const RoleManagement: React.FC = () => {
 
   const handleEditClick = (role: any) => {
     setEditingRole(role);
-    setShowDialog(true); // Show dialog for editing
+    setShowDialog(true); 
   };
 
   return (
     <div className="bg-white shadow-2xl rounded-xl p-6 space-y-6">
-      <div className="flex justify-between items-center border-b pb-4">
+      <div className="flex gap-10 items-center border-b pb-4">
         <h2 className="text-2xl font-bold text-gray-800">Role Management</h2>
-        <button
-          onClick={() => setShowDialog(true)} // Open dialog for adding role
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+        <Button
+          onClick={() => setShowDialog(true)} 
+          variant="contained"
+          color="primary"
+          startIcon={<FaPlus />}
         >
           Add Role
-        </button>
+        </Button>
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
 
@@ -137,26 +144,28 @@ const RoleManagement: React.FC = () => {
         <tbody>
           {roles.map((role) => (
             <tr key={role.id} className="hover:bg-gray-50 transition-colors border-b font-serif text-lg">
-              <td className="py-3 px-4 font-medium text-gray-800">{role.name}</td>
-              <td className="py-3 px-4 text-gray-600">
+              <td className="py-6 px-4 font-medium text-gray-800">{role.name}</td>
+              <td className="py-6 px-4 text-gray-600">
                 {role.permissions.join(", ")}
               </td>
-              <td className="py-3 px-4 text-gray-600 flex items-center space-x-2">
-                <button
+              <td className="py-6 px-4 text-gray-600 flex items-center space-x-2">
+                <Button
                   onClick={() => handleEditClick(role)}
-                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  variant="text"
+                  color="primary"
                 >
                   Edit
-                </button>
+                </Button>
               </td>
 
-              <td className="py-3 px-4 text-gray-600 ">
-                <button
+              <td className="py-6 px-4 text-gray-600 ">
+                <Button
                   onClick={() => handleDeleteRole(role.id)}
-                  className="text-red-500 hover:text-red-700 transition-colors"
+                  variant="text"
+                  color="secondary"
                 >
                   Delete
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
@@ -164,75 +173,67 @@ const RoleManagement: React.FC = () => {
       </table>
 
       {/* Dialog for Add/Edit Role */}
-      {showDialog && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-xl w-96">
-            <h2 className="text-xl font-semibold mb-4">{editingRole ? "Edit Role" : "Add Role"}</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Role Name</label>
-                <input
-                  type="text"
-                  value={editingRole ? editingRole.name : newRole.name}
-                  onChange={(e) =>
-                    editingRole
-                      ? setEditingRole({ ...editingRole, name: e.target.value })
-                      : setNewRole({ ...newRole, name: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border rounded-md"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Permissions</label>
-                <div className="space-y-2">
-                  {permissions.map((permission) => (
-                    <div key={permission.id} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        value={permission.name}
-                        checked={
-                          editingRole
-                            ? editingRole.permissions.includes(permission.name)
-                            : newRole.permissions.includes(permission.name)
-                        }
-                        onChange={(e) => {
-                          const updatedPermissions = e.target.checked
-                            ? [...(editingRole ? editingRole.permissions : newRole.permissions), permission.name]
-                            : (editingRole ? editingRole.permissions : newRole.permissions).filter(
-                                (perm: string) => perm !== permission.name
-                              );
+      <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
+        <DialogTitle>{editingRole ? "Edit Role" : "Add Role"}</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Role Name"
+            value={editingRole ? editingRole.name : newRole.name}
+            onChange={(e) =>
+              editingRole
+                ? setEditingRole({ ...editingRole, name: e.target.value })
+                : setNewRole({ ...newRole, name: e.target.value })
+            }
+            fullWidth
+            margin="normal"
+          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Permissions</label>
+            {permissions.map((permission) => (
+              <FormControlLabel
+                key={permission.id}
+                control={
+                  <Checkbox
+                    checked={
+                      editingRole
+                        ? editingRole.permissions.includes(permission.name)
+                        : newRole.permissions.includes(permission.name)
+                    }
+                    onChange={(e) => {
+                      const updatedPermissions = e.target.checked
+                        ? [...(editingRole ? editingRole.permissions : newRole.permissions), permission.name]
+                        : (editingRole ? editingRole.permissions : newRole.permissions).filter(
+                            (perm: string) => perm !== permission.name
+                          );
 
-                          if (editingRole) {
-                            setEditingRole({ ...editingRole, permissions: updatedPermissions });
-                          } else {
-                            setNewRole({ ...newRole, permissions: updatedPermissions });
-                          }
-                        }}
-                        className="mr-2"
-                      />
-                      <label className="text-sm text-gray-700">{permission.name}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={() => setShowDialog(false)}
-                  className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={editingRole ? handleUpdateRole : handleAddRole}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                >
-                  {editingRole ? "Update Role" : "Add Role"}
-                </button>
-              </div>
-            </div>
+                      if (editingRole) {
+                        setEditingRole({ ...editingRole, permissions: updatedPermissions });
+                      } else {
+                        setNewRole({ ...newRole, permissions: updatedPermissions });
+                      }
+                    }}
+                  />
+                }
+                label={permission.name}
+              />
+            ))}
           </div>
-        </div>
-      )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowDialog(false)} color="secondary">
+            Cancel
+          </Button>
+          <Button
+            onClick={editingRole ? handleUpdateRole : handleAddRole}
+            color="primary"
+          >
+            {editingRole ? "Update Role" : "Add Role"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* ToastContainer for Notifications */}
+      <ToastContainer />
     </div>
   );
 };

@@ -11,6 +11,30 @@
     {
       "id": "4411",
       "name": "Read"
+    },
+    {
+      "id": "fe49",
+      "name": "Drop"
+    },
+    {
+      "id": "cf96",
+      "name": "Update"
+    },
+    {
+      "id": "dc7d",
+      "name": "Backup"
+    },
+    {
+      "id": "9474",
+      "name": "Restore"
+    },
+    {
+      "id": "ce6a",
+      "name": "Approve"
+    },
+    {
+      "id": "e7f0",
+      "name": "Lock Resources"
     }
   ],
   "roles": [
@@ -37,7 +61,10 @@
       "permissions": [
         "Write",
         "Execute",
-        "Read"
+        "Read",
+        "Update",
+        "Backup",
+        "Restore"
       ]
     },
     {
@@ -54,27 +81,29 @@
         "Execute",
         "Read"
       ]
+    },
+    {
+      "id": "eaa3",
+      "name": "Assitant",
+      "permissions": [
+        "Write",
+        "Read",
+        "Approve"
+      ]
     }
   ],
   "users": [
     {
-      "id": "1",
-      "name": "Alice",
-      "role": "Admin",
-      "status": "Active",
-      "email": "Alice@gmail.com"
-    },
-    {
       "id": "3738",
       "name": "John Doe",
-      "role": "User",
-      "status": "Active",
-      "email": "JohnDoe213@yahoo.com"
+      "role": "Symphony",
+      "status": "Inactive",
+      "email": "JohnDoe13@yahoo.com"
     },
     {
       "id": "d9ed",
       "name": "Patrickson",
-      "role": "nkl",
+      "role": "Admin",
       "status": "Active",
       "email": "Patrick213@yahoo.com"
     },
@@ -83,6 +112,13 @@
       "name": "Richard",
       "email": "richo@gmail.com",
       "role": "User",
+      "status": "Inactive"
+    },
+    {
+      "id": "c272",
+      "name": "Srikanth ",
+      "email": "srikanthbisaiwork@gmail.com",
+      "role": "Super Admin",
       "status": "Active"
     }
   ]

@@ -1,4 +1,3 @@
-// src/components/PermissionManagement.tsx
 import React, { useState, useEffect } from "react";
 import { Permission } from "../types";
 
@@ -33,23 +32,41 @@ const PermissionManagement = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Permission Management</h2>
-      <table className="table-auto w-full border-collapse border border-gray-300">
+    <div className="bg-white shadow-2xl rounded-xl p-6 space-y-6">
+      <div className="flex  items-center border-b pb-4 gap-10">
+        <h2 className="text-2xl font-bold text-gray-800">Permission Management</h2>
+        <div className="flex items-center space-x-2">
+          <input
+            className="px-4 py-2 border rounded-md border-red-800"
+            placeholder="New Permission"
+            value={newPermission}
+            onChange={(e) => setNewPermission(e.target.value)}
+          />
+          <button
+            onClick={handleAddPermission}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Add Permission
+          </button>
+        </div>
+      </div>
+
+      {/* Permissions List */}
+      <table className="w-full border-collapse">
         <thead>
-          <tr>
-            <th className="border border-gray-300 px-4 py-2">Permission</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
+          <tr className="bg-gray-100 font-serif">
+            <th className="py-2 px-4 text-left text-2xl">Permission</th>
+            <th className="py-2 px-4 text-left text-2xl">Actions</th>
           </tr>
         </thead>
         <tbody>
           {permissions.map((permission) => (
-            <tr key={permission.id} className="hover:bg-gray-100">
-              <td className="border border-gray-300 px-4 py-2">{permission.name}</td>
-              <td className="border border-gray-300 px-4 py-2 text-center">
+            <tr key={permission.id} className="hover:bg-gray-50 transition-colors border-b font-serif text-lg">
+              <td className="py-6 px-4 font-medium text-gray-800">{permission.name}</td>
+              <td className="py-6 px-4 text-gray-600 flex items-center space-x-2">
                 <button
                   onClick={() => handleDeletePermission(permission.id)}
-                  className="text-red-500 hover:underline"
+                  className="text-red-500 hover:text-red-700 transition-colors"
                 >
                   Delete
                 </button>
@@ -58,20 +75,6 @@ const PermissionManagement = () => {
           ))}
         </tbody>
       </table>
-      <div className="mt-4 flex">
-        <input
-          className="border border-gray-300 p-2 flex-1"
-          placeholder="New Permission"
-          value={newPermission}
-          onChange={(e) => setNewPermission(e.target.value)}
-        />
-        <button
-          onClick={handleAddPermission}
-          className="bg-blue-500 text-white px-4 py-2 ml-2 rounded-md"
-        >
-          Add Permission
-        </button>
-      </div>
     </div>
   );
 };
