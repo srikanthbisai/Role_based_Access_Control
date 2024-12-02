@@ -46,18 +46,25 @@ const User: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <select
-            className="border p-2 rounded-md w-full sm:w-auto"
-            value={selectedRole}
-            onChange={(e) => setSelectedRole(e.target.value)}
-          >
-            <option value="">ALL FILTERS</option>
-            {roles.map((role) => (
-              <option key={role.id} value={role.name}>
-                {role.name}
-              </option>
-            ))}
-          </select>
+       <select
+  className="border p-2 rounded-md w-full sm:w-auto"
+  value={selectedRole}
+  onChange={(e) => setSelectedRole(e.target.value)}
+>
+  <option value="">ALL FILTERS</option>
+  {/* Only display roles without any name-related logic */}
+  {roles.map((role) => {
+    if (!role.name.toLowerCase().includes("name")) {
+      return (
+        <option key={role.id} value={role.name}>
+          {role.name}
+        </option>
+      );
+    }
+    return null; // Skip if the role contains 'name'
+  })}
+</select>
+
           <button
             onClick={() => setShowDialog(true)}
             className="text-white p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 w-full sm:w-auto"

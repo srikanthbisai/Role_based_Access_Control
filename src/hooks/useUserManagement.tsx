@@ -35,7 +35,7 @@ const useUserManagement = () => {
       try {
         const [userResponse, roleResponse] = await Promise.all([
           fetch("https://json-server-render-cha6.onrender.com/users"),
-          fetch("https://json-server-render-cha6.onrender.com/users"),
+          fetch("https://json-server-render-cha6.onrender.com/roles"),
         ]);
 
         if (!userResponse.ok || !roleResponse.ok) {
@@ -146,12 +146,11 @@ const useUserManagement = () => {
   };
 
   const filteredUsers = users.filter((user) => {
-    const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = selectedRole ? user.role === selectedRole : true;
-    return matchesSearch && matchesRole;
+    const matchesSearch = searchQuery ? user.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
+    return matchesRole && matchesSearch;
   });
-
-
+  
 
   return {
     users,roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
