@@ -1,38 +1,58 @@
 import { useState, useEffect } from "react";
 import { Permission } from "../types";
+import axios from 'axios'; 
 
 function usePermissionManagement() {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [newPermission, setNewPermission] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const API_URL = "https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/permissions";
 
   useEffect(() => {
     const fetchPermissions = async () => {
-      const response = await fetch("http://localhost:5000/permissions");
-      const data = await response.json();
-      setPermissions(data);
+      try {
+        const response = await axios.get(API_URL);
+        setPermissions(response.data);
+      } catch (err) {
+        console.error("Error fetching permissions:", err);
+        setError("Failed to fetch permissions");
+      }
     };
     fetchPermissions();
   }, []);
 
   const handleAddPermission = async () => {
     if (newPermission.trim() === "") return;
-    const response = await fetch("http://localhost:5000/permissions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: newPermission }),
-    });
-    const data = await response.json();
-    setPermissions((prev) => [...prev, data]);
-    setNewPermission("");
+    
+    try {
+      const response = await axios.post(API_URL, { name: newPermission });
+      setPermissions((prev) => [...prev, response.data]);
+      setNewPermission("");
+    } catch (err) {
+      console.error("Error adding permission:", err);
+      setError("Failed to add permission");
+    }
   };
 
   const handleDeletePermission = async (id: string) => {
-    await fetch(`http://localhost:5000/permissions/${id}`, { method: "DELETE" });
-    setPermissions((prev) => prev.filter((perm) => perm.id !== id));
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      setPermissions((prev) => prev.filter((perm) => perm.id !== id));
+    } catch (err) {
+      console.error("Error deleting permission:", err);
+      setError("Failed to delete permission");
+    }
   };
+
   return {
-     permissions, handleAddPermission, handleDeletePermission, newPermission, setNewPermission
+    permissions, 
+    handleAddPermission, 
+    handleDeletePermission, 
+    newPermission, 
+    setNewPermission,
+    error
   }
 }
 
-export default usePermissionManagement
+export default usePermissionManagement;
