@@ -1,149 +1,17 @@
-import React, { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import useUserManagement from "../hooks/useUserManagement";
 
 const UserManagement: React.FC = () => {
-  const [users, setUsers] = useState<any[]>([]);
-  const [roles, setRoles] = useState<any[]>([]);
-  const [editingUser, setEditingUser] = useState<any | null>(null);
-  const [newUser, setNewUser] = useState<Partial<any>>({
-    name: "",
-    email: "",
-    role: "",
-    status: "Active",
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [showDialog, setShowDialog] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedRole, setSelectedRole] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [userResponse, roleResponse] = await Promise.all([
-          fetch("http://localhost:5000/users"),
-          fetch("http://localhost:5000/roles"),
-        ]);
-
-        if (!userResponse.ok || !roleResponse.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const usersData = await userResponse.json();
-        const rolesData = await roleResponse.json();
-
-        setUsers(usersData);
-        setRoles(rolesData);
-      } catch (err: any) {
-        setError(err.message || "An error occurred while fetching data");
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleAddUser = async () => {
-    if (!newUser.name?.trim() || !newUser.email?.trim() || !newUser.role) {
-      toast.error("Name, email, and role are required!");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      });
-
-      if (!response.ok) throw new Error("Failed to add user");
-
-      const addedUser = await response.json();
-      setUsers((prev) => [...prev, addedUser]);
-      setNewUser({ name: "", email: "", role: "", status: "Active" });
-      setError("");
-      setShowDialog(false); // Close the dialog after adding user
-
-      toast.success("User added successfully!");
-    } catch (err: any) {
-      setError(err.message || "An error occurred while adding the user");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUpdateUser = async () => {
-    if (!editingUser) return;
-
-    setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:5000/users/${editingUser.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editingUser),
-      });
-
-      if (!response.ok) throw new Error("Failed to update user");
-
-      const updatedUser = await response.json();
-      setUsers((prev) =>
-        prev.map((user) => (user.id === updatedUser.id ? updatedUser : user))
-      );
-      setEditingUser(null);
-      setError("");
-      setShowDialog(false); // Close dialog after editing user
-
-      toast.success("User updated successfully!");
-    } catch (err: any) {
-      setError(err.message || "An error occurred while updating the user");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDeleteUser = async (id: number) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:5000/users/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to delete user");
-
-      setUsers((prev) => prev.filter((user) => user.id !== id));
-
-      toast.success("User deleted successfully!");
-    } catch (err: any) {
-      setError(err.message || "An error occurred while deleting the user");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const toggleUserStatus = (user: any) => {
-    // Toggle user status between "Active" and "Inactive"
-    const updatedUsers = users.map((u) =>
-      u.id === user.id ? { ...u, status: u.status === "Active" ? "Inactive" : "Active" } : u
-    );
-    setUsers(updatedUsers); // Update the state with the modified users list
-  };
-
-  const handleEditClick = (user: any) => {
-    setEditingUser(user);
-    setShowDialog(true); // Show dialog for editing
-  };
-
-
-  const filteredUsers = users
-    .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    .filter((user) => (selectedRole ? user.role === selectedRole : true));
+  const {
+    roles,editingUser,newUser,loading, error,showDialog, searchQuery, selectedRole, filteredUsers,setSearchQuery, setSelectedRole, setNewUser, setShowDialog, toggleUserStatus, handleAddUser, setEditingUser, handleUpdateUser, handleDeleteUser, handleEditClick,
+  } = useUserManagement();
 
   return (
     <div className="bg-white shadow-2xl rounded-xl p-6 space-y-6">

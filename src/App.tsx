@@ -1,10 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import RoleManagement from './components/RoleManagement';
 
 // Lazy load the components
 const Header = lazy(() => import('./components/Header'));
 const UserManagement = lazy(() => import('./components/UserManagement'));
-const RoleManagement = lazy(() => import('./components/RoleManagement'));
 const PermissionManagement = lazy(() => import('./components/PermissionManagement'));
 
 

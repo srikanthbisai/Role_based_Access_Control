@@ -21,20 +21,16 @@
       "name": "Update"
     },
     {
-      "id": "dc7d",
-      "name": "Backup"
-    },
-    {
-      "id": "9474",
-      "name": "Restore"
-    },
-    {
       "id": "ce6a",
       "name": "Approve"
     },
     {
       "id": "e7f0",
       "name": "Lock Resources"
+    },
+    {
+      "id": "bc01",
+      "name": "Backup"
     }
   ],
   "roles": [
@@ -43,15 +39,6 @@
       "name": "Admin",
       "permissions": [
         "Read",
-        "Write"
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Symphony",
-      "permissions": [
-        "Read",
-        "Execute",
         "Write"
       ]
     },
@@ -90,36 +77,32 @@
         "Read",
         "Approve"
       ]
+    },
+    {
+      "id": "b885",
+      "name": "Personal Assistant",
+      "permissions": [
+        "Approve",
+        "Read",
+        "Execute",
+        "Write"
+      ]
     }
   ],
   "users": [
     {
       "id": "3738",
       "name": "John Doe",
-      "role": "Symphony",
+      "role": "Clerk",
       "status": "Inactive",
       "email": "JohnDoe13@yahoo.com"
     },
     {
       "id": "d9ed",
       "name": "Patrickson",
-      "role": "Admin",
+      "role": "Super Officer",
       "status": "Active",
       "email": "Patrick213@yahoo.com"
-    },
-    {
-      "id": "6702",
-      "name": "Richard",
-      "email": "richo@gmail.com",
-      "role": "User",
-      "status": "Inactive"
-    },
-    {
-      "id": "c272",
-      "name": "Srikanth ",
-      "email": "srikanthbisaiwork@gmail.com",
-      "role": "Super Admin",
-      "status": "Active"
     }
   ]
 }
