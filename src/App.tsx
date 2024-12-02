@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Sidebar from './components/Sidebar';
 import RoleManagement from './components/RoleManagement';
+import Spinner from './utils/Spinner';
 
 // Lazy load the components
 const Header = lazy(() => import('./components/Header'));
-const UserManagement = lazy(() => import('./components/UserManagement'));
-const PermissionManagement = lazy(() => import('./components/PermissionManagement'));
+const User = lazy(() => import('./components/User'));
+const Permissions = lazy(() => import('./components/Permissions'));
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,8 +24,8 @@ const App = () => {
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
         {/* Main Content */}
-        <div className="flex-1 lg:ml-64">
-          {/* Header with a toggle button for small screens */}
+        <div className="flex-1 w-full lg:ml-64">
+          {/* Mobile Header with Sidebar Toggle */}
           <div className="lg:hidden flex items-center justify-between p-4 bg-blue-600 text-white">
             <button
               className="p-2 focus:outline-none"
@@ -35,17 +36,17 @@ const App = () => {
             <h1 className="text-xl font-bold">Admin Panel</h1>
           </div>
 
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div className="flex justify-center items-center h-screen"><Spinner/></div>}>
             <Header />
           </Suspense>
 
-          <div className="p-6">
-            <Suspense fallback={<div>Loading content...</div>}>
+          <div className="p-4 sm:p-6">
+            <Suspense fallback={<div className="flex justify-center items-center h-screen"><Spinner/></div>}>
               <Routes>
-                <Route path="/users" element={<UserManagement />} />
+                <Route path="/users" element={<User />} />
                 <Route path="/roles" element={<RoleManagement />} />
-                <Route path="/permissions" element={<PermissionManagement />} />
-                <Route path="/" element={<UserManagement />} />
+                <Route path="/permissions" element={<Permissions />} />
+                <Route path="/" element={<User />} />
               </Routes>
             </Suspense>
           </div>
