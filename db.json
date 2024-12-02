@@ -94,6 +94,13 @@
       "role": "Super Officer",
       "status": "Active",
       "email": "Patrick213@yahoo.com"
+    },
+    {
+      "id": "b066",
+      "name": "Srikanth Bisai",
+      "email": "wqojopqwjdpo@gmail.com",
+      "role": "Admin",
+      "status": "Inactive"
     }
   ]
 }
