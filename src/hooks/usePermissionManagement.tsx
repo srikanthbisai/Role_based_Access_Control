@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
 import { Permission } from "../types";
-import axios from 'axios'; 
 
 function usePermissionManagement() {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [newPermission, setNewPermission] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = "https://json-server-4ksl.vercel.app/permissions";
+  const API_URL = "https://json-server-render-cha6.onrender.com/permissions";
 
   useEffect(() => {
     const fetchPermissions = async () => {
@@ -26,7 +26,10 @@ function usePermissionManagement() {
     if (newPermission.trim() === "") return;
     
     try {
-      const response = await axios.post(API_URL, { name: newPermission });
+      const response = await axios.post(API_URL, { 
+        name: newPermission,
+        id: `perm_${Date.now()}` // Ensure unique ID
+      });
       setPermissions((prev) => [...prev, response.data]);
       setNewPermission("");
     } catch (err) {
