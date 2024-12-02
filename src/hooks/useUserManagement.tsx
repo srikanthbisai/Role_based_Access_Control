@@ -34,8 +34,8 @@ const useUserManagement = () => {
     const fetchData = async () => {
       try {
         const [userResponse, roleResponse] = await Promise.all([
-          fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/users"),
-          fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/roles"),
+          fetch("https://json-server-4ksl.vercel.app/users"),
+          fetch("https://json-server-4ksl.vercel.app/users"),
         ]);
 
         if (!userResponse.ok || !roleResponse.ok) {
@@ -63,7 +63,7 @@ const useUserManagement = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/users", {
+      const response = await fetch("https://json-server-4ksl.vercel.app/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
@@ -90,7 +90,7 @@ const useUserManagement = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/users/${editingUser.id}`, {
+      const response = await fetch(`https://json-server-4ksl.vercel.app/users/${editingUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editingUser),
@@ -117,7 +117,7 @@ const useUserManagement = () => {
   const handleDeleteUser = async (id: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/users/${id}`, {
+      const response = await fetch(`https://json-server-4ksl.vercel.app/users/${id}`, {
         method: "DELETE",
       });
 

@@ -7,7 +7,7 @@ function usePermissionManagement() {
   const [newPermission, setNewPermission] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = "https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/permissions";
+  const API_URL = "https://json-server-4ksl.vercel.app/permissions";
 
   useEffect(() => {
     const fetchPermissions = async () => {

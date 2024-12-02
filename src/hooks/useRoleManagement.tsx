@@ -14,8 +14,8 @@ useEffect(() => {
   const fetchData = async () => {
     try {
       const [rolesResponse, permissionsResponse] = await Promise.all([
-        fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/roles"),
-        fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/permissions"),
+        fetch("https://json-server-4ksl.vercel.app/roles"),
+        fetch("https://json-server-4ksl.vercel.app/permissions"),
       ]);
 
       if (!rolesResponse.ok || !permissionsResponse.ok) {
@@ -43,7 +43,7 @@ const handleAddRole = async () => {
 
   setLoading(true);
   try {
-    const response = await fetch("https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/roles", {
+    const response = await fetch("https://backend-ouomkv8on-srikanthbisais-projects.vercel.app/roles", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newRole),
@@ -68,7 +68,7 @@ const handleUpdateRole = async () => {
 
   setLoading(true);
   try {
-    const response = await fetch(`https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/roles/${editingRole.id}`, {
+    const response = await fetch(`https://backend-ouomkv8on-srikanthbisais-projects.vercel.app/roles/${editingRole.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editingRole),
@@ -93,7 +93,7 @@ const handleUpdateRole = async () => {
 const handleDeleteRole = async (id: number) => {
   setLoading(true);
   try {
-    const response = await fetch(`https://json-server-g553mh1wf-srikanthbisais-projects.vercel.app/roles/${id}`, {
+    const response = await fetch(`https://backend-ouomkv8on-srikanthbisais-projects.vercel.app/roles/${id}`, {
       method: "DELETE",
     });
 
