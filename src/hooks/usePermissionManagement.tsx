@@ -6,17 +6,22 @@ function usePermissionManagement() {
   const [permissions, setPermissions] = useState<Permission[]>([]);
   const [newPermission, setNewPermission] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const API_URL = "https://json-server-render-cha6.onrender.com/permissions";
 
   useEffect(() => {
     const fetchPermissions = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(API_URL);
         setPermissions(response.data);
+        setError(null);
       } catch (err) {
         console.error("Error fetching permissions:", err);
         setError("Failed to fetch permissions");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchPermissions();
@@ -32,6 +37,7 @@ function usePermissionManagement() {
       });
       setPermissions((prev) => [...prev, response.data]);
       setNewPermission("");
+      setError(null);
     } catch (err) {
       console.error("Error adding permission:", err);
       setError("Failed to add permission");
@@ -42,6 +48,7 @@ function usePermissionManagement() {
     try {
       await axios.delete(`${API_URL}/${id}`);
       setPermissions((prev) => prev.filter((perm) => perm.id !== id));
+      setError(null);
     } catch (err) {
       console.error("Error deleting permission:", err);
       setError("Failed to delete permission");
@@ -54,7 +61,8 @@ function usePermissionManagement() {
     handleDeletePermission, 
     newPermission, 
     setNewPermission,
-    error
+    error,
+    isLoading
   }
 }
 

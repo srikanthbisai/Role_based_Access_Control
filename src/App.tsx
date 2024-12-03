@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import Sidebar from './components/Sidebar';
-import RoleManagement from './components/RoleManagement';
-import Spinner from './utils/Spinner';
 
-// Lazy load the components
+
+const Sidebar = lazy(()=> import('./components/Sidebar'));
+const Spinner = lazy(()=> import("./utils/Spinner"))
 const Header = lazy(() => import('./components/Header'));
 const User = lazy(() => import('./components/User'));
 const Permissions = lazy(() => import('./components/Permissions'));
+const Roles = lazy(()=> import("./components/Roles")) 
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -44,7 +44,7 @@ const App = () => {
             <Suspense fallback={<div className="flex justify-center items-center h-screen"><Spinner/></div>}>
               <Routes>
                 <Route path="/users" element={<User />} />
-                <Route path="/roles" element={<RoleManagement />} />
+                <Route path="/roles" element={<Roles />} />
                 <Route path="/permissions" element={<Permissions />} />
                 <Route path="/" element={<User />} />
               </Routes>
