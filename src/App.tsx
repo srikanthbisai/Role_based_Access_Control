@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 
-const Sidebar = lazy(()=> import('./components/Sidebar'));
+const Sidebar = lazy(()=> import('./utils/Sidebar'));
 const Spinner = lazy(()=> import("./utils/Spinner"))
 const Header = lazy(() => import('./components/Header'));
 const User = lazy(() => import('./components/User'));

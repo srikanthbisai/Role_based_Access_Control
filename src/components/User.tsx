@@ -1,18 +1,43 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogContentText, 
+  DialogTitle, 
+  Button 
+} from "@mui/material";
 import CommonDialog from "../utils/CommonDialog";
 import useUserManagement from "../hooks/useUserManagement";
 import Spinner from "../utils/Spinner";
 
-
 const User: React.FC = () => {
   const {
-    roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
-    setShowDialog,  toggleUserStatus,   handleDeleteUser, handleEditClick,  setEditingUser, emailError,
+    roles, editingUser, newUser, loading, error, showDialog, searchQuery, selectedRole, 
+    filteredUsers, setSearchQuery, setSelectedRole, setNewUser, setShowDialog, 
+    toggleUserStatus, handleDeleteUser, handleEditClick, setEditingUser, emailError,
     handleEmailChange, handleCloseDialog, handleSubmit
   } = useUserManagement();
+  
+  const [deleteUserId, setDeleteUserId] = useState<number | null>(null);
+
+  const handleDeleteConfirmation = () => {
+    if (deleteUserId !== null) {
+      handleDeleteUser(deleteUserId);
+      setDeleteUserId(null);
+    }
+  };
+
+  const openDeleteConfirmation = (userId: number) => {
+    setDeleteUserId(userId);
+  };
+
+  const closeDeleteConfirmation = () => {
+    setDeleteUserId(null);
+  };
   
   if (loading && filteredUsers.length === 0) {
     return (
@@ -157,7 +182,7 @@ const User: React.FC = () => {
                 </td>
                 <td className="py-3 px-2">
                   <button
-                    onClick={() => handleDeleteUser(user.id)}
+                    onClick={() => openDeleteConfirmation(user.id)}
                     className="text-purple-400 hover:text-red-700 max-lg:text-sm lg:text-lg"
                     aria-label={`Delete user ${user.name}`}
                   >
@@ -169,6 +194,35 @@ const User: React.FC = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteUserId !== null}
+        onClose={closeDeleteConfirmation}
+        aria-labelledby="delete-user-dialog-title"
+        aria-describedby="delete-user-dialog-description"
+      >
+        <DialogTitle id="delete-user-dialog-title">
+          Delete User
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="delete-user-dialog-description">
+            Are you sure you want to delete this user? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDeleteConfirmation} color="primary">
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleDeleteConfirmation} 
+            color="error" 
+            variant="contained"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Add/Edit User Dialog */}
       <CommonDialog
@@ -264,7 +318,6 @@ const User: React.FC = () => {
           </div>
         </div>
       </CommonDialog>
-
       <ToastContainer />
     </div>
   );

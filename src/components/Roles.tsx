@@ -1,34 +1,21 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { FaPlus } from "react-icons/fa";
-import { Button, TextField, Checkbox, FormControlLabel } from "@mui/material";
+import { Button, TextField, Checkbox, FormControlLabel, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CommonDialog from '../utils/CommonDialog';
 import useRoleManagement from "../hooks/useRoleManagement";
-import Spinner from '../utils/Spinner';
+const Spinner = lazy(()=>import('../utils/Spinner'));
 
 const Roles: React.FC = () => {
-  const {     
-    roles, 
-    permissions, 
-    editingRole,  
-    setEditingRole,  
-    newRole,  
-    setNewRole,   
-    error, 
-    loading,
-    showDialog,   
-    setShowDialog,  
-    handleAddRole,   
-    handleDeleteRole,  
-    handleEditClick,   
-    handleUpdateRole 
+  const {      roles,  permissions,  editingRole,   setEditingRole,   newRole,   setNewRole,    error,  loading, showDialog,    setShowDialog,   handleAddRole,   roleToDelete, handleDeleteRoleConfirmation,  
+    confirmDeleteRole, cancelDeleteRole, handleEditClick,  handleUpdateRole 
   } = useRoleManagement();
 
-  // If loading, show spinner
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-full min-h-[500px]">
+      <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
     );
@@ -57,7 +44,7 @@ const Roles: React.FC = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 font-serif">
-              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Role Name</th>
+              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Role</th>
               <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl hidden sm:table-cell">Permissions</th>
               <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Edit</th>
               <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Delete</th>
@@ -91,7 +78,7 @@ const Roles: React.FC = () => {
                 </td>
                 <td className="py-4 px-2 sm:px-4 text-center text-gray-600">
                   <Button
-                    onClick={() => handleDeleteRole(role.id)}
+                    onClick={() => handleDeleteRoleConfirmation(role.id)}
                     variant="text"
                     color="secondary"
                     size="small"
@@ -106,7 +93,7 @@ const Roles: React.FC = () => {
         </table>
       </div>
 
-      {/* Dialog for Add/Edit Role */}
+     {/* Dialog for Add/Edit Role */}
       <CommonDialog
         open={showDialog}
         onClose={() => setShowDialog(false)}
@@ -162,7 +149,32 @@ const Roles: React.FC = () => {
         </div>
       </CommonDialog>
 
-      {/* ToastContainer for Notifications */}
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={roleToDelete !== null}
+        onClose={cancelDeleteRole}
+        aria-labelledby="delete-role-dialog-title"
+        aria-describedby="delete-role-dialog-description"
+      >
+        <DialogTitle id="delete-role-dialog-title">
+          Confirm Role Deletion
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="delete-role-dialog-description">
+            Are you sure you want to delete this role? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelDeleteRole} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={confirmDeleteRole} color="secondary" autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/*  Container registration for Toast Notifications */}
       <ToastContainer />
     </div>
   );
