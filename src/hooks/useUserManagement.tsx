@@ -43,7 +43,6 @@ const useUserManagement = () => {
           axios.get(API_USERS || "https://json-server-render-cha6.onrender.com/users"),
           axios.get(API_ROLES || "https://json-server-render-cha6.onrender.com/roles"),
         ]);
-
         setUsers(userResponse.data);
         setRoles(roleResponse.data);
       } catch (err: any) {
@@ -61,7 +60,6 @@ const useUserManagement = () => {
       toast.error("Name, email, and role are required!");
       return;
     }
-
     setLoading(true);
     try {
       const response = await axios.post(API_USERS || "", newUser);
@@ -78,9 +76,9 @@ const useUserManagement = () => {
     }
   };
 
+
   const handleUpdateUser = async () => {
     if (!editingUser) return;
-
     setLoading(true);
     try {
       const response = await axios.put(`${API_USERS}/${editingUser.id}`, editingUser);
@@ -89,7 +87,6 @@ const useUserManagement = () => {
       );
       setEditingUser(null);
       setShowDialog(false);
-
       toast.success("User updated successfully!");
     } catch (err: any) {
       setError(err.message || "An error occurred while updating the user");
@@ -98,6 +95,7 @@ const useUserManagement = () => {
       setLoading(false);
     }
   };
+
 
   const handleDeleteUser = async (id: number) => {
     setLoading(true);
@@ -113,6 +111,7 @@ const useUserManagement = () => {
     }
   };
 
+
   const toggleUserStatus = (user: User) => {
     const updatedUsers = users.map((u) =>
       u.id === user.id ? { ...u, status: u.status === "Active" ? "Inactive" : "Active" } : u
@@ -125,12 +124,12 @@ const useUserManagement = () => {
     setShowDialog(true);
   };
 
-  const validateEmail = (email: string): boolean => {
+  const validateEmail = (email: string): boolean => {   
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handleEmailChange = useCallback(
+  const handleEmailChange = useCallback(               //memoising emailChange Function
     (email: string, isEditing: boolean) => {
       if (isEditing && editingUser) {
         setEditingUser({ ...editingUser, email });
@@ -150,12 +149,10 @@ const useUserManagement = () => {
       setEmailError("Email is required");
       return;
     }
-
     if (!validateEmail(emailToValidate)) {
       setEmailError("Please enter a valid email address");
       return;
     }
-
     setEmailError("");
     editingUser ? handleUpdateUser() : handleAddUser();
   }, [editingUser, newUser]);
@@ -167,38 +164,15 @@ const useUserManagement = () => {
     setNewUser({ name: "", email: "", role: "", status: "Active" });
   }, []);
 
-  const filteredUsers = users.filter((user) => {
+  const filteredUsers = users.filter((user) => {                                                           //filter logic 
     const matchesRole = selectedRole ? user.role === selectedRole : true;
     const matchesSearch = searchQuery ? user.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
     return matchesRole && matchesSearch;
   });
 
   return {
-    users,
-    roles,
-    editingUser,
-    newUser,
-    loading,
-    error,
-    showDialog,
-    searchQuery,
-    selectedRole,
-    filteredUsers,
-    setSearchQuery,
-    setSelectedRole,
-    setNewUser,
-    setShowDialog,
-    toggleUserStatus,
-    handleAddUser,
-    handleUpdateUser,
-    handleDeleteUser,
-    handleEditClick,
-    setEditingUser,
-    validateEmail,
-    emailError,
-    setEmailError,
-    handleEmailChange,
-    handleCloseDialog,
+    users, roles, editingUser, newUser,   loading,   error, showDialog, searchQuery, selectedRole, filteredUsers, setSearchQuery, setSelectedRole, setNewUser, setShowDialog,
+    toggleUserStatus,handleAddUser,handleUpdateUser,handleDeleteUser,handleEditClick,setEditingUser,validateEmail,emailError,setEmailError,handleEmailChange,handleCloseDialog,
     handleSubmit,
   };
 };

@@ -9,7 +9,7 @@ interface SidebarProps {
   toggleSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {          //sidebar contents
   const Items = [
     { path: '/users', label: 'User Management', icon: FaUsers },
     { path: '/roles', label: 'Role Management', icon: FaUserSecret },
@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* Mobile' screen hidden sidebar */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden" 
@@ -61,7 +61,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                 text-base font-medium relative overflow-hidden
               `}
             >
-              {/* Hover effect */}
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></span>
               
               <item.icon className="text-xl flex-shrink-0" />

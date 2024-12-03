@@ -23,9 +23,8 @@ const App = () => {
         {/* Sidebar */}
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-        {/* Main Content */}
+        {/* Main */}
         <div className="flex-1 w-full lg:ml-64">
-          {/* Mobile Header with Sidebar Toggle */}
           <div className="lg:hidden flex items-center justify-between p-4 bg-blue-600 text-white">
             <button
               className="p-2 focus:outline-none"

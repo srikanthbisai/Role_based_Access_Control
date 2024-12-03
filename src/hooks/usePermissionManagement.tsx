@@ -20,17 +20,14 @@ function usePermissionManagement() {
         setError("API URL is not defined");
         setIsLoading(false);
         return;
-      }
-      
+      }    
       try { 
         setIsLoading(true); 
-        console.log('Fetching from URL:', API_URL);
         const response = await axios.get(API_URL, {
           validateStatus: function (status) {
             return status >= 200 && status < 300; 
           }
         }); 
-        console.log('Full response:', response);
         setPermissions(response.data); 
         setError(null); 
       } catch (err: any) { 
@@ -60,7 +57,7 @@ function usePermissionManagement() {
     try { 
       const response = await axios.post(API_URL, { 
         name: newPermission, 
-        id: `perm_${Date.now()}` // Ensure unique ID 
+        id: `perm_${Date.now()}` 
       }); 
       setPermissions((prev) => [...prev, response.data]); 
       setNewPermission(""); 
@@ -71,7 +68,7 @@ function usePermissionManagement() {
     } 
   }; 
 
-  const handlePermissionInput = (e: React.ChangeEvent<HTMLInputElement>) => { 
+  const handlePermissionInput = (e: React.ChangeEvent<HTMLInputElement>) => {   //regex check for email Validation
     const lettersOnly = /^[A-Za-z]*$/; 
     if (lettersOnly.test(e.target.value)) { 
       setNewPermission(e.target.value); 
@@ -82,8 +79,7 @@ function usePermissionManagement() {
     if (!API_URL) {
       setError(" API URL is not defined");
       return;
-    }
-    
+    }  
     try { 
       await axios.delete(`${API_URL}/${id}`); 
       setPermissions((prev) => prev.filter((perm) => perm.id !== id)); 
@@ -114,19 +110,8 @@ function usePermissionManagement() {
   };
 
   return { 
-    permissions, 
-    handleAddPermission, 
-    handleDeletePermission, 
-    newPermission, 
-    setNewPermission, 
-    error, 
-    isLoading, 
-    handlePermissionInput, 
-    openDeleteDialog, 
-    setOpenDeleteDialog, 
-    handleConfirmDelete, 
-    handleCancelDelete, 
-    confirmDelete
+    permissions,  handleAddPermission,  handleDeletePermission,  newPermission,  setNewPermission,  error,  isLoading,  handlePermissionInput,  openDeleteDialog,  setOpenDeleteDialog, 
+    handleConfirmDelete,   handleCancelDelete,   confirmDelete
   }; 
 } 
 

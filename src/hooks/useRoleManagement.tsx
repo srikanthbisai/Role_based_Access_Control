@@ -26,10 +26,8 @@ function useRoleManagement() {
           axios.get(ROLES_API_URL),
           axios.get(PERMISSIONS_API_URL),
         ]);
-
         setRoles(rolesResponse.data);
-        setPermissions(permissionsResponse.data);
-        
+        setPermissions(permissionsResponse.data);   
       } catch(err: any) {
         const errorMessage = err.response?.data?.message || err.message || "An error occurred while fetching data";
         setError(errorMessage);
@@ -42,18 +40,17 @@ function useRoleManagement() {
     fetchData();
   }, []);
 
+
   const handleAddRole = async () => {
     if (!newRole.name?.trim()) {
       toast.error("Role name is required");
       return;
     }
-
     setLoading(true);
     try {
       const response = await axios.post(ROLES_API_URL, newRole, {
         headers: { "Content-Type": "application/json" },
       });
-
       setRoles((prev) => [...prev, response.data]);
       setNewRole({ name: "", permissions: [] });
       toast.success("Role added successfully!");
@@ -75,11 +72,9 @@ function useRoleManagement() {
       const response = await axios.put(`${ROLES_API_URL}/${editingRole.id}`, editingRole, {
         headers: { "Content-Type": "application/json" },
       });
-
       setRoles((prev) =>
         prev.map((role) => (role.id === response.data.id ? response.data : role))
       );
-
       toast.success("Role updated successfully!");
       setEditingRole(null);
       setShowDialog(false);
@@ -93,18 +88,14 @@ function useRoleManagement() {
   };
 
 
-
   const handleDeleteRoleConfirmation = (id: number) => {
     setRoleToDelete(id);
   };
-
   const confirmDeleteRole = async () => {
     if (roleToDelete === null) return;
-
    setLoading(true);
     try {
       await axios.delete(`${ROLES_API_URL}/${roleToDelete}`);
-
       setRoles((prev) => prev.filter((role) => role.id !== roleToDelete));
       toast.success("Role deleted successfully!");
       setRoleToDelete(null);
@@ -117,6 +108,8 @@ function useRoleManagement() {
     }
   };
 
+  
+
   const cancelDeleteRole = () => {
     setRoleToDelete(null);
   };
@@ -127,27 +120,8 @@ function useRoleManagement() {
   };
 
   return {
-    loading, 
-    setLoading, 
-    roles, 
-    setRoles, 
-    permissions, 
-    setPermissions, 
-    editingRole, 
-    setEditingRole, 
-    newRole, 
-    setNewRole, 
-    error, 
-    setError, 
-    showDialog, 
-    setShowDialog,
-    roleToDelete,
-    handleAddRole, 
-    handleDeleteRoleConfirmation, 
-    confirmDeleteRole,
-    cancelDeleteRole,
-    handleEditClick, 
-    handleUpdateRole   
+    loading,  setLoading,  roles,  setRoles,  permissions,  setPermissions,  editingRole,  setEditingRole,  newRole,  setNewRole,  error,  setError,  showDialog,  setShowDialog,
+    roleToDelete, handleAddRole,  handleDeleteRoleConfirmation,  confirmDeleteRole, cancelDeleteRole, handleEditClick,   handleUpdateRole   
   }
 }
 
