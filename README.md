@@ -103,7 +103,7 @@ Key dependencies include:
 ```bash
 @mui/material: For dialog boxes and warn dialogs before deleting users to ensure willing deletion of users.
 react-toastify: For real-time notifications.
-json-server: Mock backend for data persistence.
+json-server: Mock backend for data persistence and quick api setup.
 tailwind: for css styles.
 typescript: Ensures type safety.
 ```
