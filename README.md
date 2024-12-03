@@ -20,7 +20,7 @@ npm install
 ```
 
 
-Runs the app in the development mode.\
+Runs the app in the development mode
 
 ```bash
 npm start
