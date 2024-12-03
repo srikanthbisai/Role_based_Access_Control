@@ -9,14 +9,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-```bash 
-   npm install
-```
 This helps in installing all the packages after cloning the repository from
 ```bash
 git clone https://github.com/srikanthbisai/Role_based_Access_Control.git
 ```
-and run 
+
+and run to install all the packages listed in the package.json file
+```bash 
+   npm install
+```
+
+
 
 ```bash
  npm start
