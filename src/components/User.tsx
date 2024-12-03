@@ -105,19 +105,19 @@ const User: React.FC = () => {
         >
           <thead>
             <tr className="bg-gray-100">
-              <th className="py-4 px-2 text-left">Name</th>
-              <th className="py-4 px-2 text-left hidden md:table-cell">
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg">Name</th>
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden md:table-cell">
                 Email
               </th>
-              <th className="py-4 px-2 text-left hidden md:table-cell">
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden md:table-cell">
                 Status
               </th>
-              <th className="py-4 px-2 text-left">Role</th>
-              <th className="py-4 px-2 text-left hidden md:table-cell">
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg">Role</th>
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden md:table-cell">
                 Activity
               </th>
-              <th className="py-4 px-2 text-left">Edit</th>
-              <th className="py-4 px-2 text-left">Delete</th>
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg">Edit</th>
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg">Delete</th>
             </tr>
           </thead>
           <tbody>
