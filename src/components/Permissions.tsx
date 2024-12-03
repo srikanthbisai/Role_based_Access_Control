@@ -4,7 +4,6 @@ import Spinner from "../utils/Spinner";
 const Permissions = () => {
   const {
     newPermission, 
-    setNewPermission, 
     handleDeletePermission, 
     handleAddPermission, 
     permissions,
