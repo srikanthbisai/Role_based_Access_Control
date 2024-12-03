@@ -1,9 +1,17 @@
 The backend is deployed on Render.com which might take a little time to serve responses as it gets shut down when not hit constantly.
 Backend Repo is located at (https://github.com/srikanthbisai/json_server_render)
 
-The project has packages like toastify, json-server, 
-
-
+The project has packages 
+ ```bash
+    toastify, json-server, react-icons, emotion/react, emotion/styled,emotion/styled,
+    mui/icons-material,
+    mui/material, axios,
+    react-icons,
+    react-router-dom,
+    react-toastify,
+    tailwindcss,
+    typescript,
+```
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
