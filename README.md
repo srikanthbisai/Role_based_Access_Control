@@ -67,26 +67,32 @@ Role-Based Access Control (RBAC) Project
 This project implements a Role-Based Access Control (RBAC) system with a responsive user interface, enabling user and role management with efficient CRUD operations. It showcases modern web development practices using React and TypeScript with Material-UI components for a polished and professional UI/UX.
 
 🛠️ Features
-Frontend
-Built With: React + TypeScript for type-safe development.
-UI/UX:
-Material-UI components for dialogs, grids, and responsiveness.
-Slider animations for toggling user active status.
-Feedback and Validation:
-Toast notifications for success/error messages using react-toastify.
-Regex-based email validation.
-Optimized Codebase:
-Code splitting and custom hooks for modularity.
-Centralized error handling using try-catch.
-Search & Filter:
-Search users by name with optimized filtering logic.
-Responsive Design:
-Fully mobile-friendly layout.
+      Frontend
+          Built With: React + TypeScript for type-safe development.
+          UI/UX:
+          Material-UI components for dialogs, grids, and responsiveness.
+          Slider animations for toggling user active status.
+              Feedback and Validation:
+                 Toast notifications for success/error messages using react-toastify.
+                 Regex-based email validation.
+
+  Optimization Approaches:
+                 Code splitting and custom hooks for modularity.
+                 Centralized error handling using try-catch.
+                 Search & Filter:
+                 Search users by name with optimized filtering logic.
+
+  Responsive Design:
+                 Fully mobile-friendly layout.
+
+
+
 Backend
-Mock JSON Server:
-Provides backend functionality for CRUD operations.
-Deployed on Render.com. Note: The server may take up to 30 seconds to start if idle.
-Backend Repository
+     Mock JSON Server:
+     Provides backend functionality for CRUD operations.
+     Deployed on Render.com. Note: The server may take up to 30 seconds to start if idle.
+ 
+ Backend Repository
 
 🚀 Getting Started
 Prerequisites
@@ -97,40 +103,21 @@ npm or yarn
 Installation
 Clone this repository:
 
-bash
-Copy code
-git clone https://github.com/srikanthbisai/rbac.git
+```bash
+git clone https://github.com/srikanthbisai/json-server.git
 cd rbac
-Install dependencies:
-
-bash
-Copy code
+```
+Install All the Dependencies
+```bash
 npm install
-Start the development server:
+```
 
-bash
-Copy code
-npm start
+Start the development server:
+```bash
+  npm start
+```
 Access the app in your browser at http://localhost:3000.
 
-📂 Project Structure
-plaintext
-Copy code
-rbac/
-├── public/          # Public assets
-├── src/
-│   ├── components/  # Reusable React components
-│   ├── hooks/       # Custom hooks
-│   ├── pages/       # Page components
-│   ├── services/    # API service functions
-│   ├── styles/      # TailwindCSS styles
-│   ├── utils/       # Utility functions
-│   ├── App.tsx      # Root component
-│   └── index.tsx    # Entry point
-├── package.json     # Project dependencies and scripts
-└── README.md        # Project documentation
-📜 Scripts
-In the project directory, you can run the following commands:
 
 npm start
 Runs the app in development mode.
