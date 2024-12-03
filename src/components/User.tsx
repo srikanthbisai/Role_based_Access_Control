@@ -50,7 +50,7 @@ const User: React.FC = () => {
   return (
     <div 
       className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 w-full max-w-full mx-auto overflow-x-auto font-serif text-lg"
-      aria-label="User Management Section"
+      
     >
       <div className="flex flex-col sm:flex-row gap-4 items-center border-b pb-4">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800 w-full sm:w-auto text-center sm:text-left">
@@ -63,13 +63,13 @@ const User: React.FC = () => {
             placeholder="Search by name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search users"
+           
           />
           <select
             className="border p-2 rounded-md w-full sm:w-auto"
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
-            aria-label="Filter by role"
+            
           >
             <option value="">ALL FILTERS</option>
             {roles.map((role) => {
@@ -87,9 +87,9 @@ const User: React.FC = () => {
           <button
             onClick={() => setShowDialog(true)}
             className="text-white p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 w-full sm:w-auto"
-            aria-label="Add new user"
+           
           >
-            <FaPlus aria-hidden="true" />
+            <FaPlus />
             Add User
           </button>
         </div>
@@ -101,7 +101,7 @@ const User: React.FC = () => {
       <div className="overflow-x-auto">
         <table 
           className="w-full border-collapse table-auto mt-4" 
-          aria-labelledby="user-list-heading"
+         
         >
           <thead>
             <tr className="bg-gray-100">
@@ -175,7 +175,7 @@ const User: React.FC = () => {
                   <button
                     onClick={() => handleEditClick(user)}
                     className="text-blue-500 hover:text-blue-700 max-lg:text-xs lg:text-sm"
-                    aria-label={`Edit user ${user.name}`}
+                   
                   >
                     EDIT
                   </button>
@@ -184,7 +184,7 @@ const User: React.FC = () => {
                   <button
                     onClick={() => openDeleteConfirmation(user.id)}
                     className="text-purple-400 hover:text-red-700 max-lg:text-xs lg:text-sm"
-                    aria-label={`Delete user ${user.name}`}
+                   
                   >
                    DELETE
                   </button>
@@ -248,7 +248,7 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, name: e.target.value })
               }
               className="border p-2 rounded-md"
-              aria-required="true"
+              
             />
           </div>
 
@@ -263,8 +263,7 @@ const User: React.FC = () => {
               className={`border p-2 rounded-md ${
                 emailError ? 'border-red-500' : ''
               }`}
-              aria-invalid={!!emailError}
-              aria-describedby="email-error"
+
             />
             {emailError && (
               <p 
@@ -288,7 +287,7 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, role: e.target.value })
               }
               className="border p-2 rounded-md"
-              aria-required="true"
+             
             >
               <option value="">Select Role</option>
               {roles.map((role) => (
@@ -310,7 +309,7 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, status: e.target.value })
               }
               className="border p-2 rounded-md"
-              aria-required="true"
+              
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
