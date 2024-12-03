@@ -40,8 +40,8 @@ const useUserManagement = () => {
       setLoading(true);
       try {
         const [userResponse, roleResponse] = await Promise.all([
-          axios.get(API_USERS || ""),
-          axios.get(API_ROLES || ""),
+          axios.get(API_USERS || "https://json-server-render-cha6.onrender.com/users"),
+          axios.get(API_ROLES || "https://json-server-render-cha6.onrender.com/roles"),
         ]);
 
         setUsers(userResponse.data);

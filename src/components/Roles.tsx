@@ -11,7 +11,7 @@ const Roles: React.FC = () => {
   const {      roles,  permissions,  editingRole,   setEditingRole,   newRole,   setNewRole,    error,  loading, showDialog,    setShowDialog,   handleAddRole,   roleToDelete, handleDeleteRoleConfirmation,  
     confirmDeleteRole, cancelDeleteRole, handleEditClick,  handleUpdateRole 
   } = useRoleManagement();
-
+  
 
   if (loading) {
     return (
