@@ -101,7 +101,7 @@ The backend will run at
 Key dependencies include:
 
 ```bash
-mui/material: For dialog boxes and warn dialog's before deleting users to ensure willing deletion of users.
+@mui/material: For dialog boxes and warn dialogs before deleting users to ensure willing deletion of users.
 react-toastify: For real-time notifications.
 json-server: Mock backend for data persistence.
 tailwind: for css styles.
