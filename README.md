@@ -16,7 +16,7 @@ git clone https://github.com/srikanthbisai/Role_based_Access_Control.git
 
 and run to install all the packages listed in the package.json file
 ```bash 
-   npm install
+npm install
 ```
 
 
