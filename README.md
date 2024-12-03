@@ -40,28 +40,18 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
-```bash
-# This is a bash block
-echo "Hello, GitHub!"
-npm install
-npm start
-```
-
-
-
-
 Role-Based Access Control (RBAC) Project
 This project implements a Role-Based Access Control (RBAC) system with a responsive user interface, enabling user and role management with efficient CRUD operations. It showcases modern web development practices using React and TypeScript with Material-UI components for a polished and professional UI/UX.
 
 🛠️ Features
-      Frontend
+     ⭐️ Frontend
           Built With: React + TypeScript for type-safe development.
           UI/UX:
           Material-UI components for dialogs, grids, and responsiveness.
           Slider animations for toggling user active status.
-              Feedback and Validation:
-                 Toast notifications for success/error messages using react-toastify.
-                 Regex-based email validation.
+               Feedback and Validation:
+                    Toast notifications for success/error messages using react-toastify.
+                    Regex-based email validation.
 
   Optimization Approaches:
                  Code splitting and custom hooks for modularity.
@@ -73,48 +63,19 @@ This project implements a Role-Based Access Control (RBAC) system with a respons
                  Fully mobile-friendly layout.
 
 
-
 Backend
      Mock JSON Server:
      Provides backend functionality for CRUD operations.
      Deployed on Render.com. Note: The server may take up to 30 seconds to start if idle.
+
  
- Backend Repository
+⭐️ Backend Repository
 
 🚀 Getting Started
 Prerequisites
 Ensure you have the following installed on your system:
 
 Node.js (v16+ recommended)
-npm or yarn
-Installation
-Clone this repository:
-
-```bash
-git clone https://github.com/srikanthbisai/json_server_render.git
-```
-
-Install All the Dependencies
-```bash
-npm install
-```
-
-Start the development server:
-```bash
- 
-```
-Access the app in your browser at http://localhost:5000.
-
-npm run build
-Builds the app for production in the build directory.
-Optimizes the React app for deployment by minifying and hashing file names.
-
-```bash
-npm run eject
-```
- 
-Warning: This is a one-way operation. Once you eject, you cannot undo this action.
-This command gives full control over configuration files like webpack, Babel, and ESLint. Proceed only if customization is essential.
 
 🔗 Backend Setup
 The backend is a mock JSON server deployed on Render.com.
