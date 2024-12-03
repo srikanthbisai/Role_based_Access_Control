@@ -11,20 +11,36 @@ function usePermissionManagement() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [permissionToDelete, setPermissionToDelete] = useState<string | null>(null);
   
-  const API_URL = "https://json-server-render-cha6.onrender.com/permissions"; 
-
+  const API_URL = `${process.env.REACT_APP_API_URL}/permissions`; 
   
 
   useEffect(() => { 
     const fetchPermissions = async () => { 
+      if (!API_URL) {
+        setError("API URL is not defined");
+        setIsLoading(false);
+        return;
+      }
+      
       try { 
         setIsLoading(true); 
-        const response = await axios.get(API_URL); 
+        console.log('Fetching from URL:', API_URL);
+        const response = await axios.get(API_URL, {
+          validateStatus: function (status) {
+            return status >= 200 && status < 300; 
+          }
+        }); 
+        console.log('Full response:', response);
         setPermissions(response.data); 
         setError(null); 
-      } catch (err) { 
-        console.error("Error fetching permissions:", err); 
-        setError("Failed to fetch permissions"); 
+      } catch (err: any) { 
+        console.error("Detailed error:", {
+          message: err.message,
+          response: err.response?.data,
+          status: err.response?.status,
+          headers: err.response?.headers
+        }); 
+        setError(`Failed to fetch permissions: ${err.message}`); 
       } finally { 
         setIsLoading(false); 
       } 
@@ -32,7 +48,14 @@ function usePermissionManagement() {
     fetchPermissions(); 
   }, []); 
 
+
+
   const handleAddPermission = async () => { 
+    if (!API_URL) {
+      setError("API URL is not defined");
+      return;
+    }
+    
     if (newPermission.trim() === "") return; 
     try { 
       const response = await axios.post(API_URL, { 
@@ -42,7 +65,7 @@ function usePermissionManagement() {
       setPermissions((prev) => [...prev, response.data]); 
       setNewPermission(""); 
       setError(null); 
-    } catch (err) { 
+    } catch (err: any) { 
       console.error("Error adding permission:", err); 
       setError("Failed to add permission"); 
     } 
@@ -56,12 +79,17 @@ function usePermissionManagement() {
   }; 
 
   const handleDeletePermission = async (id: string) => { 
+    if (!API_URL) {
+      setError(" API URL is not defined");
+      return;
+    }
+    
     try { 
       await axios.delete(`${API_URL}/${id}`); 
       setPermissions((prev) => prev.filter((perm) => perm.id !== id)); 
       toast.success("Permission deleted successfully"); 
       setError(null); 
-    } catch (err) { 
+    } catch (err: any) { 
       console.error("Error deleting permission:", err); 
       setError("Failed to delete permission"); 
     } 
@@ -93,7 +121,12 @@ function usePermissionManagement() {
     setNewPermission, 
     error, 
     isLoading, 
-    handlePermissionInput , openDeleteDialog, setOpenDeleteDialog, handleConfirmDelete, handleCancelDelete, confirmDelete
+    handlePermissionInput, 
+    openDeleteDialog, 
+    setOpenDeleteDialog, 
+    handleConfirmDelete, 
+    handleCancelDelete, 
+    confirmDelete
   }; 
 } 
 

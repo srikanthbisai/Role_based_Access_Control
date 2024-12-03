@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 interface User {
@@ -29,25 +30,22 @@ const useUserManagement = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const API_USERS = `${process.env.REACT_APP_API_URL}/users`;
+  const API_ROLES = `${process.env.REACT_APP_API_URL}/roles`;
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const [userResponse, roleResponse] = await Promise.all([
-          fetch(`https://json-server-render-cha6.onrender.com/users`),
-          fetch("https://json-server-render-cha6.onrender.com/roles"),
+          axios.get(API_USERS || ""),
+          axios.get(API_ROLES || ""),
         ]);
 
-        if (!userResponse.ok || !roleResponse.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const usersData = await userResponse.json();
-        const rolesData = await roleResponse.json();
-
-        setUsers(usersData);
-        setRoles(rolesData);
+        setUsers(userResponse.data);
+        setRoles(roleResponse.data);
       } catch (err: any) {
         setError(err.message || "An error occurred while fetching data");
         toast.error("Failed to load user data");
@@ -56,8 +54,7 @@ const useUserManagement = () => {
       }
     };
     fetchData();
-  }, []);
-
+  }, [API_USERS, API_ROLES]);
 
   const handleAddUser = async () => {
     if (!newUser.name?.trim() || !newUser.email?.trim() || !newUser.role) {
@@ -67,18 +64,9 @@ const useUserManagement = () => {
 
     setLoading(true);
     try {
-      const response = await fetch("https://json-server-render-cha6.onrender.com/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      });
-
-      if (!response.ok) throw new Error("Failed to add user");
-
-      const addedUser = await response.json();
-      setUsers((prev) => [...prev, addedUser]);
+      const response = await axios.post(API_USERS || "", newUser);
+      setUsers((prev) => [...prev, response.data]);
       setNewUser({ name: "", email: "", role: "", status: "Active" });
-      setError("");
       setShowDialog(false);
 
       toast.success("User added successfully!");
@@ -95,20 +83,11 @@ const useUserManagement = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`https://json-server-render-cha6.onrender.com/users/${editingUser.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(editingUser),
-      });
-
-      if (!response.ok) throw new Error("Failed to update user");
-
-      const updatedUser = await response.json();
+      const response = await axios.put(`${API_USERS}/${editingUser.id}`, editingUser);
       setUsers((prev) =>
-        prev.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+        prev.map((user) => (user.id === response.data.id ? response.data : user))
       );
       setEditingUser(null);
-      setError("");
       setShowDialog(false);
 
       toast.success("User updated successfully!");
@@ -123,14 +102,8 @@ const useUserManagement = () => {
   const handleDeleteUser = async (id: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`https://json-server-render-cha6.onrender.com/users/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to delete user");
-
+      await axios.delete(`${API_USERS}/${id}`);
       setUsers((prev) => prev.filter((user) => user.id !== id));
-
       toast.success("User deleted successfully!");
     } catch (err: any) {
       setError(err.message || "An error occurred while deleting the user");
@@ -139,7 +112,6 @@ const useUserManagement = () => {
       setLoading(false);
     }
   };
-
 
   const toggleUserStatus = (user: User) => {
     const updatedUsers = users.map((u) =>
@@ -158,27 +130,22 @@ const useUserManagement = () => {
     return emailRegex.test(email);
   };
 
-  const filteredUsers = users.filter((user) => {
-    const matchesRole = selectedRole ? user.role === selectedRole : true;
-    const matchesSearch = searchQuery ? user.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
-    return matchesRole && matchesSearch;
-  });
-
-  const [emailError, setEmailError] = useState<string>("");
-
-  const handleEmailChange = useCallback((email: string, isEditing: boolean) => {
-    if (isEditing && editingUser) {
-      setEditingUser({ ...editingUser, email });
-      setEmailError(validateEmail(email) ? "" : "Invalid email format");
-    } else {
-      setNewUser({ ...newUser, email });
-      setEmailError(validateEmail(email) ? "" : "Invalid email format");
-    }
-  }, [editingUser, newUser, setEditingUser, setNewUser]);
+  const handleEmailChange = useCallback(
+    (email: string, isEditing: boolean) => {
+      if (isEditing && editingUser) {
+        setEditingUser({ ...editingUser, email });
+        setEmailError(validateEmail(email) ? "" : "Invalid email format");
+      } else {
+        setNewUser({ ...newUser, email });
+        setEmailError(validateEmail(email) ? "" : "Invalid email format");
+      }
+    },
+    [editingUser, newUser]
+  );
 
   const handleSubmit = useCallback(() => {
     const emailToValidate = editingUser?.email || newUser.email;
-    
+
     if (!emailToValidate) {
       setEmailError("Email is required");
       return;
@@ -191,7 +158,7 @@ const useUserManagement = () => {
 
     setEmailError("");
     editingUser ? handleUpdateUser() : handleAddUser();
-  }, [editingUser, newUser, handleUpdateUser, handleAddUser]);
+  }, [editingUser, newUser]);
 
   const handleCloseDialog = useCallback(() => {
     setShowDialog(false);
@@ -200,10 +167,39 @@ const useUserManagement = () => {
     setNewUser({ name: "", email: "", role: "", status: "Active" });
   }, []);
 
+  const filteredUsers = users.filter((user) => {
+    const matchesRole = selectedRole ? user.role === selectedRole : true;
+    const matchesSearch = searchQuery ? user.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
+    return matchesRole && matchesSearch;
+  });
+
   return {
-    users,roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
-    setShowDialog,  toggleUserStatus,  handleAddUser,  handleUpdateUser,  handleDeleteUser, handleEditClick,  setEditingUser, validateEmail, emailError, setEmailError,
-    handleEmailChange, handleCloseDialog, handleSubmit
+    users,
+    roles,
+    editingUser,
+    newUser,
+    loading,
+    error,
+    showDialog,
+    searchQuery,
+    selectedRole,
+    filteredUsers,
+    setSearchQuery,
+    setSelectedRole,
+    setNewUser,
+    setShowDialog,
+    toggleUserStatus,
+    handleAddUser,
+    handleUpdateUser,
+    handleDeleteUser,
+    handleEditClick,
+    setEditingUser,
+    validateEmail,
+    emailError,
+    setEmailError,
+    handleEmailChange,
+    handleCloseDialog,
+    handleSubmit,
   };
 };
 
