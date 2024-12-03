@@ -48,8 +48,8 @@ const Permissions = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100 font-serif">
-                <th className="py-4 px-2 sm:px-4 text-left">Permission</th>
-                <th className="py-4 px-2 sm:px-4 text-left">Actions</th>
+                <th className="py-4 px-2 sm:px-4 text-left max-lg:text-md lg:text-lg">Permission</th>
+                <th className="py-4 px-2 sm:px-4 text-left max-lg:text-md lg:text-lg">Actions</th>
               </tr>
             </thead>
             <tbody>
