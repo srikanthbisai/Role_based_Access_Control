@@ -32,6 +32,7 @@ const useUserManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const [userResponse, roleResponse] = await Promise.all([
           fetch(`https://json-server-render-cha6.onrender.com/users`),
@@ -49,11 +50,14 @@ const useUserManagement = () => {
         setRoles(rolesData);
       } catch (err: any) {
         setError(err.message || "An error occurred while fetching data");
+        toast.error("Failed to load user data");
+      } finally {
+        setLoading(false);
       }
     };
-
     fetchData();
   }, []);
+
 
   const handleAddUser = async () => {
     if (!newUser.name?.trim() || !newUser.email?.trim() || !newUser.role) {
@@ -80,6 +84,7 @@ const useUserManagement = () => {
       toast.success("User added successfully!");
     } catch (err: any) {
       setError(err.message || "An error occurred while adding the user");
+      toast.error("Failed to add user");
     } finally {
       setLoading(false);
     }
@@ -109,6 +114,7 @@ const useUserManagement = () => {
       toast.success("User updated successfully!");
     } catch (err: any) {
       setError(err.message || "An error occurred while updating the user");
+      toast.error("Failed to update user");
     } finally {
       setLoading(false);
     }
@@ -128,10 +134,12 @@ const useUserManagement = () => {
       toast.success("User deleted successfully!");
     } catch (err: any) {
       setError(err.message || "An error occurred while deleting the user");
+      toast.error("Failed to delete user");
     } finally {
       setLoading(false);
     }
   };
+
 
   const toggleUserStatus = (user: User) => {
     const updatedUsers = users.map((u) =>
@@ -188,7 +196,9 @@ const useUserManagement = () => {
   const handleCloseDialog = useCallback(() => {
     setShowDialog(false);
     setEmailError("");
-  }, [setShowDialog]);
+    setEditingUser(null);
+    setNewUser({ name: "", email: "", role: "", status: "Active" });
+  }, []);
 
   return {
     users,roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,

@@ -4,11 +4,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CommonDialog from "../utils/CommonDialog";
 import useUserManagement from "../hooks/useUserManagement";
+import Spinner from "../utils/Spinner";
 
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
 
 const User: React.FC = () => {
   const {
@@ -17,7 +14,13 @@ const User: React.FC = () => {
     handleEmailChange, handleCloseDialog, handleSubmit
   } = useUserManagement();
   
-  
+  if (loading && filteredUsers.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div 

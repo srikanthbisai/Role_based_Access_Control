@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CommonDialog from '../utils/CommonDialog';
 import useRoleManagement from "../hooks/useRoleManagement";
+import Spinner from '../utils/Spinner';
 
 const Roles: React.FC = () => {
   const {     
@@ -15,6 +16,7 @@ const Roles: React.FC = () => {
     newRole,  
     setNewRole,   
     error, 
+    loading,
     showDialog,   
     setShowDialog,  
     handleAddRole,   
@@ -22,6 +24,15 @@ const Roles: React.FC = () => {
     handleEditClick,   
     handleUpdateRole 
   } = useRoleManagement();
+
+  // If loading, show spinner
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full min-h-[500px]">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full overflow-x-auto font-serif">
