@@ -20,7 +20,7 @@ const Permissions = () => {
     <div className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full overflow-x-auto">
       {/* Existing code for header and input */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center border-b pb-4 gap-4 sm:gap-10 justify-between">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex-shrink-0">Permission Management</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 flex-shrink-0 font-serif">Permission Management</h2>
         <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
           <input
             className="w-full sm:w-auto px-3 py-2 text-sm sm:text-base border rounded-md border-gray-300 focus:border-blue-500 focus:outline-none transition-colors"
@@ -49,8 +49,8 @@ const Permissions = () => {
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-100 font-serif">
-                <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Permission</th>
-                <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Actions</th>
+                <th className="py-4 px-2 sm:px-4 text-left">Permission</th>
+                <th className="py-4 px-2 sm:px-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>

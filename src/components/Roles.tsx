@@ -44,10 +44,10 @@ const Roles: React.FC = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 font-serif">
-              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Role</th>
-              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl hidden sm:table-cell">Permissions</th>
-              <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Edit</th>
-              <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Delete</th>
+              <th className="py-4 px-2 sm:px-4 text-left ">Role</th>
+              <th className="py-4 px-2 sm:px-4 text-left  hidden sm:table-cell">Permissions</th>
+              <th className="py-4 px-2 sm:px-4 text-center ">Edit</th>
+              <th className="py-4 px-2 sm:px-4 text-center ">Delete</th>
             </tr>
           </thead>
           <tbody>
