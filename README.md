@@ -37,9 +37,8 @@ This project implements a Role-Based Access Control (RBAC) system with a respons
      ⭐️ Frontend
           Built With: React + TypeScript for type-safe development.
           UI/UX:
-          Material-UI components for dialogs, grids, and responsiveness.
-          Slider animations for toggling user active status.
-               Feedback and Validation:
+          Material-UI components for dialogs. UI responsiveness through tailwind utility classes. Slider animations for toggling user active status.
+      Feedback and Validation:
                     Toast notifications for success/error messages using react-toastify.
                     Regex-based email validation.
 
@@ -47,8 +46,8 @@ This project implements a Role-Based Access Control (RBAC) system with a respons
                  Code splitting and custom hooks for modularity.
                  Centralized error handling using try-catch.
                  Search & Filter:
-                 Search users by name with optimized filtering logic.
-
+                 Search users by name by wrapping the filter function inside useCallback 
+hook for memoisation.
   Responsive Design:
                  Fully mobile-friendly layout.
 
@@ -87,7 +86,7 @@ npm install -g json-server
 
 Start the Json Server
 
-Start the server: if port you want to run is 8000 , replace it with the port number you like
+Start the server:  replace it with the port number you like
 ```bash
 json-server --watch db.json --port 8000
 ```
@@ -102,14 +101,14 @@ The backend will run at
 Key dependencies include:
 
 ```bash
-@mui/material: For responsive and feature-rich UI components.
+@mui/material: For dialog boxes and warn dialog's before deleting users to ensure willing deletion of users.
 react-toastify: For real-time notifications.
-axios: For handling API requests.
 json-server: Mock backend for data persistence.
+tailwind: for css styles.
 typescript: Ensures type safety.
 ```
 📝 Notes
-Render.com Delays: The backend server may take up to 30 seconds to start if idle. Please wait patiently for responses.
+Render.com Delays: The backend server may take up to 30 seconds to start if idle. Have set up a cron job for every 1 minute to poll the server. Please wait patiently for responses. 
 The project uses best practices in component architecture, responsiveness, and state management.
 📋 License
 This project is licensed under the MIT License. See the LICENSE file for details.
