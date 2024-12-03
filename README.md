@@ -3,14 +3,7 @@ Backend Repo is located at (https://github.com/srikanthbisai/json_server_render)
 
 The project has packages 
  ```bash
-    toastify, json-server, react-icons, emotion/react, emotion/styled,emotion/styled,
-    mui/icons-material,
-    mui/material, axios,
-    react-icons,
-    react-router-dom,
-    react-toastify,
-    tailwindcss,
-    typescript,
+    toastify, json-server, react-icons, emotion/react, emotion/styled,emotion/styled, mui/icons-material,mui/material, axios, react-icons, react-router-dom, react-toastify, tailwindcss, typescript,
 ```
 # Getting Started with Create React App
 
