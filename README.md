@@ -129,25 +129,34 @@ git clone https://github.com/srikanthbisai/json_server_render.git
 cd json_server_render
 Install dependencies:
 
+Install the Json Server to create a json based simplistic mock server by running this command
 ```bash
-npm install
+npm install -g json-server
 ```
 
-Start the server:
+Start the Json Server
+
+Start the server: if port you want to run is 8000 , replace it with the port number you like
 ```bash
-npm start
+json-server --watch db.json --port 8000
 ```
 
-The backend will run at http://localhost:5000.
+The backend will run at
+```bash
+ http://localhost:8000
+```
+
 
 📦 Dependencies
 Key dependencies include:
 
+```bash
 @mui/material: For responsive and feature-rich UI components.
 react-toastify: For real-time notifications.
 axios: For handling API requests.
 json-server: Mock backend for data persistence.
 typescript: Ensures type safety.
+```
 📝 Notes
 Render.com Delays: The backend server may take up to 30 seconds to start if idle. Please wait patiently for responses.
 The project uses best practices in component architecture, responsiveness, and state management.
