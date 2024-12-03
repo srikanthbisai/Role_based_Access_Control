@@ -1,7 +1,7 @@
 The backend is deployed on Render.com which might take a little time to serve responses as it gets shut down when not hit constantly.
-Backend Repo is located at [](https://github.com/srikanthbisai/json_server_render)
+Backend Repo is located at (https://github.com/srikanthbisai/json_server_render)
 
-The project has packages like 
+The project has packages like toastify, json-server, 
 
 
 # Getting Started with Create React App
@@ -50,3 +50,138 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+Role-Based Access Control (RBAC) Project
+This project implements a Role-Based Access Control (RBAC) system with a responsive user interface, enabling user and role management with efficient CRUD operations. It showcases modern web development practices using React and TypeScript with Material-UI components for a polished and professional UI/UX.
+
+🛠️ Features
+Frontend
+Built With: React + TypeScript for type-safe development.
+UI/UX:
+Material-UI components for dialogs, grids, and responsiveness.
+Slider animations for toggling user active status.
+Feedback and Validation:
+Toast notifications for success/error messages using react-toastify.
+Regex-based email validation.
+Optimized Codebase:
+Code splitting and custom hooks for modularity.
+Centralized error handling using try-catch.
+Search & Filter:
+Search users by name with optimized filtering logic.
+Responsive Design:
+Fully mobile-friendly layout.
+Backend
+Mock JSON Server:
+Provides backend functionality for CRUD operations.
+Deployed on Render.com. Note: The server may take up to 30 seconds to start if idle.
+Backend Repository
+
+🚀 Getting Started
+Prerequisites
+Ensure you have the following installed on your system:
+
+Node.js (v16+ recommended)
+npm or yarn
+Installation
+Clone this repository:
+
+bash
+Copy code
+git clone https://github.com/srikanthbisai/rbac.git
+cd rbac
+Install dependencies:
+
+bash
+Copy code
+npm install
+Start the development server:
+
+bash
+Copy code
+npm start
+Access the app in your browser at http://localhost:3000.
+
+📂 Project Structure
+plaintext
+Copy code
+rbac/
+├── public/          # Public assets
+├── src/
+│   ├── components/  # Reusable React components
+│   ├── hooks/       # Custom hooks
+│   ├── pages/       # Page components
+│   ├── services/    # API service functions
+│   ├── styles/      # TailwindCSS styles
+│   ├── utils/       # Utility functions
+│   ├── App.tsx      # Root component
+│   └── index.tsx    # Entry point
+├── package.json     # Project dependencies and scripts
+└── README.md        # Project documentation
+📜 Scripts
+In the project directory, you can run the following commands:
+
+npm start
+Runs the app in development mode.
+Visit http://localhost:3000 in your browser.
+The app will reload on code edits, and lint errors will appear in the console.
+
+npm test
+Launches the test runner in watch mode.
+Refer to the running tests guide for more details.
+
+npm run build
+Builds the app for production in the build directory.
+Optimizes the React app for deployment by minifying and hashing file names.
+
+npm run eject
+Warning: This is a one-way operation. Once you eject, you cannot undo this action.
+This command gives full control over configuration files like webpack, Babel, and ESLint. Proceed only if customization is essential.
+
+🔗 Backend Setup
+The backend is a mock JSON server deployed on Render.com.
+Clone the backend repository for local setup:
+
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/srikanthbisai/json_server_render.git
+cd json_server_render
+Install dependencies:
+
+bash
+Copy code
+npm install
+Start the server:
+
+bash
+Copy code
+npm start
+The backend will run at http://localhost:5000.
+
+📦 Dependencies
+Key dependencies include:
+
+@mui/material: For responsive and feature-rich UI components.
+react-toastify: For real-time notifications.
+axios: For handling API requests.
+json-server: Mock backend for data persistence.
+typescript: Ensures type safety.
+📝 Notes
+Render.com Delays: The backend server may take up to 30 seconds to start if idle. Please wait patiently for responses.
+The project uses best practices in component architecture, responsiveness, and state management.
+📋 License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+🤝 Contributing
+Contributions are welcome! Please open an issue or submit a pull request for suggestions or bug fixes.
+
+📧 Contact
+For queries, feel free to reach out:
+Email: srikanthbisaiwork@gmail.com
+
+This version aligns well with GitHub markdown formatting, making it easy to read and follow for contributors and users.
