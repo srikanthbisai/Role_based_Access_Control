@@ -1,5 +1,5 @@
 import usePermissionManagement from "../hooks/usePermissionManagement";
-import Spinner from "../utils/Spinner"; // Assuming the Spinner is in the utils folder
+import Spinner from "../utils/Spinner"; 
 
 const Permissions = () => {
   const {
@@ -9,8 +9,10 @@ const Permissions = () => {
     handleAddPermission, 
     permissions,
     isLoading,
-    error
+    error, handlePermissionInput
   } = usePermissionManagement();
+
+
 
   return (
     <div className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 space-y-4 sm:space-y-6 w-full overflow-x-auto">
@@ -21,7 +23,7 @@ const Permissions = () => {
             className="w-full sm:w-auto px-3 py-2 text-sm sm:text-base border rounded-md border-gray-300 focus:border-blue-500 focus:outline-none transition-colors"
             placeholder="New Permission"
             value={newPermission}
-            onChange={(e) => setNewPermission(e.target.value)}
+            onChange={handlePermissionInput}
           />
           <button
             onClick={handleAddPermission}

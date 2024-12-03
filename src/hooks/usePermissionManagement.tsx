@@ -44,6 +44,14 @@ function usePermissionManagement() {
     }
   };
 
+  const handlePermissionInput = (e:any) => {
+    const lettersOnly = /^[A-Za-z]*$/;
+    
+    if (lettersOnly.test(e.target.value)) {
+      setNewPermission(e.target.value);
+    }
+  };
+
   const handleDeletePermission = async (id: string) => {
     try {
       await axios.delete(`${API_URL}/${id}`);
@@ -62,7 +70,7 @@ function usePermissionManagement() {
     newPermission, 
     setNewPermission,
     error,
-    isLoading
+    isLoading, handlePermissionInput
   }
 }
 
