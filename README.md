@@ -14,7 +14,7 @@ This helps in installing all the packages after cloning the repository from
 git clone https://github.com/srikanthbisai/Role_based_Access_Control.git
 ```
 
-and run to install all the packages listed in the package.json file
+and  to install all the packages listed in the package.json file
 ```bash 
 npm install
 ```
@@ -22,7 +22,7 @@ npm install
 
 
 ```bash
- npm start
+npm start
 ```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
