@@ -126,7 +126,7 @@ const User: React.FC = () => {
                 key={user.id}
                 className="hover:bg-gray-50 transition-colors border-b"
               >
-                <td className="py-4 px-2 font-medium text-gray-800">
+                <td className="py-4 px-2 font-medium text-gray-800 max-sm:text-xs">
                   {user.name}
                 </td>
                 <td className="py-3 px-2 text-gray-600 hidden md:table-cell">
@@ -143,7 +143,7 @@ const User: React.FC = () => {
                     {user.status}
                   </span>
                 </td>
-                <td className="py-3 px-2 text-gray-600">{user.role}</td>
+                <td className="py-3 px-2 text-gray-600 max-sm:text-sm">{user.role}</td>
                 <td className="py-3 px-2 text-gray-600 hidden md:table-cell">
                   <label className="inline-flex items-center cursor-pointer">
                     <input
@@ -174,7 +174,7 @@ const User: React.FC = () => {
                 <td className="py-3 px-2">
                   <button
                     onClick={() => handleEditClick(user)}
-                    className="text-blue-500 hover:text-blue-700 max-lg:text-sm lg:text-lg"
+                    className="text-blue-500 hover:text-blue-700 max-lg:text-xs lg:text-sm"
                     aria-label={`Edit user ${user.name}`}
                   >
                     EDIT
@@ -183,7 +183,7 @@ const User: React.FC = () => {
                 <td className="py-3 px-2">
                   <button
                     onClick={() => openDeleteConfirmation(user.id)}
-                    className="text-purple-400 hover:text-red-700 max-lg:text-sm lg:text-lg"
+                    className="text-purple-400 hover:text-red-700 max-lg:text-xs lg:text-sm"
                     aria-label={`Delete user ${user.name}`}
                   >
                    DELETE

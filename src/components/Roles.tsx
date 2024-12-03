@@ -5,8 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CommonDialog from '../utils/CommonDialog';
 import useRoleManagement from "../hooks/useRoleManagement";
-const Spinner = lazy(()=>import('../utils/Spinner'));
 
+const Spinner = lazy(()=>import('../utils/Spinner'));
 const Roles: React.FC = () => {
   const {      roles,  permissions,  editingRole,   setEditingRole,   newRole,   setNewRole,    error,  loading, showDialog,    setShowDialog,   handleAddRole,   roleToDelete, handleDeleteRoleConfirmation,  
     confirmDeleteRole, cancelDeleteRole, handleEditClick,  handleUpdateRole 
