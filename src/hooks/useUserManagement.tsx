@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 
 interface User {
@@ -34,7 +34,7 @@ const useUserManagement = () => {
     const fetchData = async () => {
       try {
         const [userResponse, roleResponse] = await Promise.all([
-          fetch("https://json-server-render-cha6.onrender.com/users"),
+          fetch(`https://json-server-render-cha6.onrender.com/users`),
           fetch("https://json-server-render-cha6.onrender.com/roles"),
         ]);
 
@@ -145,16 +145,55 @@ const useUserManagement = () => {
     setShowDialog(true);
   };
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const filteredUsers = users.filter((user) => {
     const matchesRole = selectedRole ? user.role === selectedRole : true;
     const matchesSearch = searchQuery ? user.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
     return matchesRole && matchesSearch;
   });
-  
+
+  const [emailError, setEmailError] = useState<string>("");
+
+  const handleEmailChange = useCallback((email: string, isEditing: boolean) => {
+    if (isEditing && editingUser) {
+      setEditingUser({ ...editingUser, email });
+      setEmailError(validateEmail(email) ? "" : "Invalid email format");
+    } else {
+      setNewUser({ ...newUser, email });
+      setEmailError(validateEmail(email) ? "" : "Invalid email format");
+    }
+  }, [editingUser, newUser, setEditingUser, setNewUser]);
+
+  const handleSubmit = useCallback(() => {
+    const emailToValidate = editingUser?.email || newUser.email;
+    
+    if (!emailToValidate) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(emailToValidate)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+
+    setEmailError("");
+    editingUser ? handleUpdateUser() : handleAddUser();
+  }, [editingUser, newUser, handleUpdateUser, handleAddUser]);
+
+  const handleCloseDialog = useCallback(() => {
+    setShowDialog(false);
+    setEmailError("");
+  }, [setShowDialog]);
 
   return {
     users,roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
-    setShowDialog,  toggleUserStatus,  handleAddUser,  handleUpdateUser,  handleDeleteUser, handleEditClick,  setEditingUser
+    setShowDialog,  toggleUserStatus,  handleAddUser,  handleUpdateUser,  handleDeleteUser, handleEditClick,  setEditingUser, validateEmail, emailError, setEmailError,
+    handleEmailChange, handleCloseDialog, handleSubmit
   };
 };
 

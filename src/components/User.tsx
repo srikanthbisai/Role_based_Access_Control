@@ -1,35 +1,29 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { FaPlus } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CommonDialog from "../utils/CommonDialog";
 import useUserManagement from "../hooks/useUserManagement";
 
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 const User: React.FC = () => {
   const {
-    roles,
-    editingUser,
-    newUser,
-    loading,
-    error,
-    showDialog,
-    searchQuery,
-    selectedRole,
-    filteredUsers,
-    setSearchQuery,
-    setSelectedRole,
-    setNewUser,
-    setShowDialog,
-    toggleUserStatus,
-    handleAddUser,
-    setEditingUser,
-    handleUpdateUser,
-    handleDeleteUser,
-    handleEditClick,
+    roles, editingUser, newUser, loading,  error,  showDialog,  searchQuery,  selectedRole,  filteredUsers,  setSearchQuery,  setSelectedRole,  setNewUser,
+    setShowDialog,  toggleUserStatus,   handleDeleteUser, handleEditClick,  setEditingUser, emailError,
+    handleEmailChange, handleCloseDialog, handleSubmit
   } = useUserManagement();
+  
+  
 
   return (
-    <div className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 w-full max-w-full mx-auto overflow-x-auto font-serif text-lg">
+    <div 
+      className="bg-white shadow-2xl rounded-xl p-4 sm:p-6 w-full max-w-full mx-auto overflow-x-auto font-serif text-lg"
+      aria-label="User Management Section"
+    >
       <div className="flex flex-col sm:flex-row gap-4 items-center border-b pb-4">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800 w-full sm:w-auto text-center sm:text-left">
           User Management
@@ -41,11 +35,13 @@ const User: React.FC = () => {
             placeholder="Search by name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search users"
           />
           <select
             className="border p-2 rounded-md w-full sm:w-auto"
             value={selectedRole}
             onChange={(e) => setSelectedRole(e.target.value)}
+            aria-label="Filter by role"
           >
             <option value="">ALL FILTERS</option>
             {roles.map((role) => {
@@ -63,18 +59,22 @@ const User: React.FC = () => {
           <button
             onClick={() => setShowDialog(true)}
             className="text-white p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 w-full sm:w-auto"
+            aria-label="Add new user"
           >
-            <FaPlus />
+            <FaPlus aria-hidden="true" />
             Add User
           </button>
         </div>
       </div>
 
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+      {error && <p className="text-red-500 text-sm mt-2" role="alert">{error}</p>}
 
       {/* User List */}
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse table-auto mt-4">
+        <table 
+          className="w-full border-collapse table-auto mt-4" 
+          aria-labelledby="user-list-heading"
+        >
           <thead>
             <tr className="bg-gray-100">
               <th className="py-4 px-2 text-left">Name</th>
@@ -147,6 +147,7 @@ const User: React.FC = () => {
                   <button
                     onClick={() => handleEditClick(user)}
                     className="text-blue-500 hover:text-blue-700 max-lg:text-sm lg:text-lg"
+                    aria-label={`Edit user ${user.name}`}
                   >
                     EDIT
                   </button>
@@ -155,6 +156,7 @@ const User: React.FC = () => {
                   <button
                     onClick={() => handleDeleteUser(user.id)}
                     className="text-purple-400 hover:text-red-700 max-lg:text-sm lg:text-lg"
+                    aria-label={`Delete user ${user.name}`}
                   >
                    DELETE
                   </button>
@@ -168,16 +170,17 @@ const User: React.FC = () => {
       {/* Add/Edit User Dialog */}
       <CommonDialog
         open={showDialog}
-        onClose={() => setShowDialog(false)}
-        onSubmit={editingUser ? handleUpdateUser : handleAddUser}
+        onClose={handleCloseDialog}
+        onSubmit={handleSubmit}
         title={editingUser ? "Edit User" : "Add New User"}
         submitButtonText={editingUser ? "Update" : "Add"}
         loading={loading}
       >
         <div className="space-y-4">
           <div className="flex flex-col">
-            <label className="mb-1">Name</label>
+            <label htmlFor="user-name" className="mb-1">Name</label>
             <input
+              id="user-name"
               type="text"
               min={3}
               max={20}
@@ -188,27 +191,39 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, name: e.target.value })
               }
               className="border p-2 rounded-md"
+              aria-required="true"
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1">Email</label>
+            <label htmlFor="user-email" className="mb-1">Email</label>
             <input
+              id="user-email"
               type="email"
               required
               value={editingUser ? editingUser.email : newUser.email}
-              onChange={(e) =>
-                editingUser
-                  ? setEditingUser({ ...editingUser, email: e.target.value })
-                  : setNewUser({ ...newUser, email: e.target.value })
-              }
-              className="border p-2 rounded-md"
+              onChange={(e) => handleEmailChange(e.target.value, !!editingUser)}
+              className={`border p-2 rounded-md ${
+                emailError ? 'border-red-500' : ''
+              }`}
+              aria-invalid={!!emailError}
+              aria-describedby="email-error"
             />
+            {emailError && (
+              <p 
+                id="email-error" 
+                className="text-red-500 text-sm mt-1" 
+                role="alert"
+              >
+                {emailError}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1">Role</label>
+            <label htmlFor="user-role" className="mb-1">Role</label>
             <select
+              id="user-role"
               value={editingUser ? editingUser.role : newUser.role}
               onChange={(e) =>
                 editingUser
@@ -216,6 +231,7 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, role: e.target.value })
               }
               className="border p-2 rounded-md"
+              aria-required="true"
             >
               <option value="">Select Role</option>
               {roles.map((role) => (
@@ -227,8 +243,9 @@ const User: React.FC = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1">Status</label>
+            <label htmlFor="user-status" className="mb-1">Status</label>
             <select
+              id="user-status"
               value={editingUser ? editingUser.status : newUser.status}
               onChange={(e) =>
                 editingUser
@@ -236,6 +253,7 @@ const User: React.FC = () => {
                   : setNewUser({ ...newUser, status: e.target.value })
               }
               className="border p-2 rounded-md"
+              aria-required="true"
             >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>

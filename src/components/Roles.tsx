@@ -7,8 +7,20 @@ import CommonDialog from '../utils/CommonDialog';
 import useRoleManagement from "../hooks/useRoleManagement";
 
 const Roles: React.FC = () => {
-  const {     roles,   permissions,   editingRole,  setEditingRole,  newRole,  setNewRole,   error, 
-    showDialog,   setShowDialog,  handleAddRole,   handleDeleteRole,  handleEditClick,   handleUpdateRole 
+  const {     
+    roles, 
+    permissions, 
+    editingRole,  
+    setEditingRole,  
+    newRole,  
+    setNewRole,   
+    error, 
+    showDialog,   
+    setShowDialog,  
+    handleAddRole,   
+    handleDeleteRole,  
+    handleEditClick,   
+    handleUpdateRole 
   } = useRoleManagement();
 
   return (
@@ -36,8 +48,8 @@ const Roles: React.FC = () => {
             <tr className="bg-gray-100 font-serif">
               <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Role Name</th>
               <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl hidden sm:table-cell">Permissions</th>
-              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Edit</th>
-              <th className="py-4 px-2 sm:px-4 text-left text-sm sm:text-2xl">Delete</th>
+              <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Edit</th>
+              <th className="py-4 px-2 sm:px-4 text-center text-sm sm:text-2xl">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -55,27 +67,27 @@ const Roles: React.FC = () => {
                 <td className="py-4 px-2 sm:px-4 text-gray-600 hidden sm:table-cell">
                   {role.permissions.join(", ")}
                 </td>
-                <td className="py-4 px-2 sm:px-4 text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      onClick={() => handleEditClick(role)}
-                      variant="text"
-                      color="primary"
-                      size="small"
-                      className="text-purple-400 hover:text-red-700 "
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      onClick={() => handleDeleteRole(role.id)}
-                      variant="text"
-                      color="secondary"
-                      size="small"
-                      className="text-purple-400 hover:text-red-700"
-                    >
-                      Delete
-                    </Button>
-                  </div>
+                <td className="py-4 px-2 sm:px-4 text-center text-gray-600">
+                  <Button
+                    onClick={() => handleEditClick(role)}
+                    variant="text"
+                    color="primary"
+                    size="small"
+                    className="text-purple-400 hover:text-red-700"
+                  >
+                    Edit
+                  </Button>
+                </td>
+                <td className="py-4 px-2 sm:px-4 text-center text-gray-600">
+                  <Button
+                    onClick={() => handleDeleteRole(role.id)}
+                    variant="text"
+                    color="secondary"
+                    size="small"
+                    className="text-purple-400 hover:text-red-700"
+                  >
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))}
