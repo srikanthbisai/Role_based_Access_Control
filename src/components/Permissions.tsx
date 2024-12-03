@@ -82,8 +82,6 @@ const Permissions = () => {
       <Dialog
         open={openDeleteDialog}
         onClose={handleCancelDelete}
-        aria-labelledby="delete-permission-dialog-title"
-        aria-describedby="delete-permission-dialog-description"
       >
         <DialogTitle id="delete-permission-dialog-title">
           {"Confirm Delete Permission"}
