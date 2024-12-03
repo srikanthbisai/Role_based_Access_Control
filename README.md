@@ -1,10 +1,6 @@
 The backend is deployed on Render.com which might take a little time to serve responses as it gets shut down when not hit constantly.
 Backend Repo is located at (https://github.com/srikanthbisai/json_server_render)
 
-The project has packages 
- ```bash
-    toastify, json-server, react-icons, emotion/react, emotion/styled,emotion/styled, mui/icons-material,mui/material, axios, react-icons, react-router-dom, react-toastify, tailwindcss, typescript,
-```
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -36,15 +32,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
@@ -104,9 +91,9 @@ Installation
 Clone this repository:
 
 ```bash
-git clone https://github.com/srikanthbisai/json-server.git
-cd rbac
+git clone https://github.com/srikanthbisai/json_server_render.git
 ```
+
 Install All the Dependencies
 ```bash
 npm install
@@ -114,25 +101,18 @@ npm install
 
 Start the development server:
 ```bash
-  npm start
+ 
 ```
-Access the app in your browser at http://localhost:3000.
-
-
-npm start
-Runs the app in development mode.
-Visit http://localhost:3000 in your browser.
-The app will reload on code edits, and lint errors will appear in the console.
-
-npm test
-Launches the test runner in watch mode.
-Refer to the running tests guide for more details.
+Access the app in your browser at http://localhost:5000.
 
 npm run build
 Builds the app for production in the build directory.
 Optimizes the React app for deployment by minifying and hashing file names.
 
+```bash
 npm run eject
+```
+ 
 Warning: This is a one-way operation. Once you eject, you cannot undo this action.
 This command gives full control over configuration files like webpack, Babel, and ESLint. Proceed only if customization is essential.
 
@@ -142,20 +122,22 @@ Clone the backend repository for local setup:
 
 Clone the repository:
 
-bash
-Copy code
+```bash
 git clone https://github.com/srikanthbisai/json_server_render.git
+```
+
 cd json_server_render
 Install dependencies:
 
-bash
-Copy code
+```bash
 npm install
-Start the server:
+```
 
-bash
-Copy code
+Start the server:
+```bash
 npm start
+```
+
 The backend will run at http://localhost:5000.
 
 📦 Dependencies
@@ -177,6 +159,5 @@ Contributions are welcome! Please open an issue or submit a pull request for sug
 
 📧 Contact
 For queries, feel free to reach out:
-Email: srikanthbisaiwork@gmail.com
+Email: srikanthbisai2110@gmail.com
 
-This version aligns well with GitHub markdown formatting, making it easy to read and follow for contributors and users.
