@@ -9,8 +9,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+```bash 
+   npm install
+```
+This helps in installing all the packages after cloning the repository from
+```bash
+git clone https://github.com/srikanthbisai/Role_based_Access_Control.git
+```
+and run 
 
+```bash
+ npm start
+```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
