@@ -153,8 +153,6 @@ const Roles: React.FC = () => {
       <Dialog
         open={roleToDelete !== null}
         onClose={cancelDeleteRole}
-        aria-labelledby="delete-role-dialog-title"
-        aria-describedby="delete-role-dialog-description"
       >
         <DialogTitle id="delete-role-dialog-title">
           Confirm Role Deletion
