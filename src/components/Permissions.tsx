@@ -1,4 +1,5 @@
 import {  Dialog,  DialogActions,  DialogContent,  DialogContentText,  DialogTitle,  Button} from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import usePermissionManagement from "../hooks/usePermissionManagement";
@@ -27,12 +28,14 @@ const Permissions = () => {
             value={newPermission}
             onChange={handlePermissionInput}
           />
-          <button
-            onClick={handleAddPermission}
-            className="w-full sm:w-auto bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm sm:text-base"
+          <Button
+          onClick={handleAddPermission}
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
           >
-            Add Permission
-          </button>
+          Add Permission
+          </Button>
         </div>
       </div>
 
@@ -62,12 +65,13 @@ const Permissions = () => {
                     {permission.name}
                   </td>
                   <td className="py-4 px-2 sm:px-4 text-gray-600">
-                    <button
+                    <Button
                       onClick={() => confirmDelete(permission.id)}
-                      className="text-red-500 hover:text-red-700 transition-colors text-xs sm:text-base"
+                      color="error"
+                      variant="outlined"
                     >
                       Delete
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))}
