@@ -1,7 +1,10 @@
+USer component
 import React, { useState } from "react";
-import { Add as AddIcon } from '@mui/icons-material';
+import { FaPlus } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "@mui/material";
+
 import { 
   Dialog,  DialogActions,  DialogContent,  DialogContentText, DialogTitle,  Button 
 } from "@mui/material";
@@ -79,14 +82,14 @@ const User: React.FC = () => {
             })}
           </select>
 
-        <Button
-         onClick={() => setShowDialog(true)}
-         variant="contained"
-         color="primary"
-         startIcon={<AddIcon />}
-         >
-        Add User
-        </Button>
+          <button
+            onClick={() => setShowDialog(true)}
+            className="text-white p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 w-full sm:w-auto"
+           
+          >
+            <FaPlus />
+            Add User
+          </button>
         </div>
       </div>
 
@@ -166,25 +169,23 @@ const User: React.FC = () => {
                     </div>
                   </label>
                 </td>
-              <td className="py-3 px-2">
-                  <Button
+                <td className="py-3 px-2">
+                  <button
                     onClick={() => handleEditClick(user)}
-                    color="primary"
-                    variant="text"
-                    size="small"
+                    className="text-blue-500 hover:text-blue-700 max-lg:text-xs lg:text-sm"
+                   
                   >
-                    Edit
-                  </Button>
+                    EDIT
+                  </button>
                 </td>
                 <td className="py-3 px-2">
-                  <Button
+                  <button
                     onClick={() => openDeleteConfirmation(user.id)}
-                    color="error"
-                    variant="text"
-                    size="small"
+                    className="text-red-500 hover:text-red-700 max-lg:text-xs lg:text-sm"
+                   
                   >
-                    Delete
-                  </Button>
+                   DELETE
+                  </button>
                 </td>
               </tr>
             ))}
@@ -318,3 +319,4 @@ const User: React.FC = () => {
 };
 
 export default User;
+
