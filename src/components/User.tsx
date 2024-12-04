@@ -85,6 +85,7 @@ const User: React.FC = () => {
             variant="contained"
             color="primary"
             startIcon={<AddIcon />}
+            className="w-full sm:w-auto"
           >
             Add User
           </Button>
