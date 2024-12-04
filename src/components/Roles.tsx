@@ -13,8 +13,8 @@ const Roles: React.FC = () => {
   } = useRoleManagement();
   
 
-  if (loading) {
-    return (
+  if (loading) {              //spinner if no data yet from backend 
+    return ( 
       <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
