@@ -1,6 +1,6 @@
 USer component
 import React, { useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import AddIcon from "@mui/icons-material/Add";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from "@mui/material";
@@ -82,14 +82,14 @@ const User: React.FC = () => {
             })}
           </select>
 
-          <button
+          <Button
             onClick={() => setShowDialog(true)}
-            className="text-white p-2 rounded-md bg-blue-500 hover:bg-blue-700 transition-colors flex justify-center items-center gap-2 w-full sm:w-auto"
-           
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
           >
-            <FaPlus />
             Add User
-          </button>
+          </Button>
         </div>
       </div>
 
