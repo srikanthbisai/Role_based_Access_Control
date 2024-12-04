@@ -86,7 +86,7 @@ const User: React.FC = () => {
          color="primary"
          startIcon={<AddIcon />}
          >
-         User
+        Add User
         </Button>
         </div>
       </div>
