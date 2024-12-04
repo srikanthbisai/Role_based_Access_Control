@@ -13,8 +13,11 @@ This helps in installing all the packages after cloning the repository from
 ```bash
 git clone https://github.com/srikanthbisai/Role_based_Access_Control.git
 ```
-
-and  to install all the packages listed in the package.json file
+cd 
+```bash
+  Role_based_Access_Control
+```
+and  to install all the packages listed in the package.json file run
 ```bash 
 npm install
 ```
@@ -38,7 +41,7 @@ This project implements a Role-Based Access Control (RBAC) system with a respons
           Built With: React + TypeScript for type-safe development.
           UI/UX:
           Material-UI components for dialogs. UI responsiveness through tailwind utility classes. Slider animations for toggling user active status.
-      Feedback and Validation:
+                Feedback and Validation:
                     Toast notifications for success/error messages using react-toastify.
                     Regex-based email validation.
 
@@ -46,8 +49,7 @@ This project implements a Role-Based Access Control (RBAC) system with a respons
                  Code splitting and custom hooks for modularity.
                  Centralized error handling using try-catch.
                  Search & Filter:
-                 Search users by name by wrapping the filter function inside useCallback 
-hook for memoisation.
+                 Search users by name by wrapping the filter function inside useCallback hook for memoisation.
   Responsive Design:
                  Fully mobile-friendly layout.
 
@@ -56,7 +58,7 @@ Backend
      Mock JSON Server:
      Provides backend functionality for CRUD operations.
      Deployed on Render.com. Note: The server may take up to 30 seconds to start if idle.
-
+     Set up a Cron Job to keeping pinging the server with a new request every minute to keep it awake. 
  
 ⭐️ Backend Repository
 
@@ -76,7 +78,10 @@ Clone the repository:
 git clone https://github.com/srikanthbisai/json_server_render.git
 ```
 
-cd json_server_render
+cd
+```bash
+ json_server_render
+```
 Install dependencies:
 
 Install the Json Server to create a json based simplistic mock server by running this command
