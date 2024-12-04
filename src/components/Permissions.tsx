@@ -34,7 +34,7 @@ const Permissions = () => {
           color="primary"
           startIcon={<AddIcon />}
           >
-          Add Permission
+          Add
           </Button>
         </div>
       </div>
