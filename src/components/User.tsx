@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "@mui/material";
 import { 
-  Dialog, 
-  DialogActions, 
-  DialogContent, 
-  DialogContentText, 
-  DialogTitle, 
-  Button 
+  Dialog,  DialogActions,  DialogContent,  DialogContentText, DialogTitle,  Button 
 } from "@mui/material";
 import CommonDialog from "../utils/CommonDialog";
 import useUserManagement from "../hooks/useUserManagement";
@@ -171,23 +167,25 @@ const User: React.FC = () => {
                     </div>
                   </label>
                 </td>
-                <td className="py-3 px-2">
-                  <button
+              <td className="py-3 px-2">
+                  <Button
                     onClick={() => handleEditClick(user)}
-                    className="text-blue-500 hover:text-blue-700 max-lg:text-xs lg:text-sm"
-                   
+                    color="primary"
+                    variant="text"
+                    size="small"
                   >
-                    EDIT
-                  </button>
+                    Edit
+                  </Button>
                 </td>
                 <td className="py-3 px-2">
-                  <button
+                  <Button
                     onClick={() => openDeleteConfirmation(user.id)}
-                    className="text-red-500 hover:text-red-700 max-lg:text-xs lg:text-sm"
-                   
+                    color="error"
+                    variant="text"
+                    size="small"
                   >
-                   DELETE
-                  </button>
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))}
