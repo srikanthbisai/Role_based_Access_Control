@@ -168,22 +168,24 @@ const User: React.FC = () => {
                   </label>
                 </td>
                 <td className="py-3 px-2">
-                  <button
+               <Button
                     onClick={() => handleEditClick(user)}
-                    className="text-blue-500 hover:text-blue-700 max-lg:text-xs lg:text-sm"
-                   
+                    variant="contained"
+                    color="primary"
+                    size="small"
                   >
-                    EDIT
-                  </button>
+                    Edit
+                  </Button>
                 </td>
                 <td className="py-3 px-2">
-                  <button
+                  <Button
                     onClick={() => openDeleteConfirmation(user.id)}
-                    className="text-red-500 hover:text-red-700 max-lg:text-xs lg:text-sm"
-                   
+                    variant="contained"
+                    color="error"
+                    size="small"
                   >
-                   DELETE
-                  </button>
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))}
