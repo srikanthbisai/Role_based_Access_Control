@@ -68,7 +68,7 @@ const Permissions = () => {
                     <Button
                       onClick={() => confirmDelete(permission.id)}
                       color="error"
-                      variant="text"
+                      variant="contained"
                     >
                       Delete
                     </Button>
