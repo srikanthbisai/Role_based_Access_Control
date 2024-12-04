@@ -80,7 +80,7 @@ const Roles: React.FC = () => {
                   <Button
                     onClick={() => handleDeleteRoleConfirmation(role.id)}
                     variant="text"
-                    color="secondary"
+                    color="error"
                     size="small"
                     className="text-purple-400 hover:text-red-700"
                   >
