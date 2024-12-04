@@ -68,7 +68,7 @@ const Roles: React.FC = () => {
                 <td className="py-4 px-2 sm:px-4 text-center text-gray-600">
                   <Button
                     onClick={() => handleEditClick(role)}
-                    variant="text"
+                    variant="contained"
                     color="primary"
                     size="small"
                     className="text-purple-400 hover:text-red-700"
@@ -79,7 +79,7 @@ const Roles: React.FC = () => {
                 <td className="py-4 px-2 sm:px-4 text-center text-gray-600">
                   <Button
                     onClick={() => handleDeleteRoleConfirmation(role.id)}
-                    variant="text"
+                    variant="contained"
                     color="error"
                     size="small"
                     className="text-purple-400 hover:text-red-700"
