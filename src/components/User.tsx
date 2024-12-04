@@ -183,7 +183,7 @@ const User: React.FC = () => {
                 <td className="py-3 px-2">
                   <button
                     onClick={() => openDeleteConfirmation(user.id)}
-                    className="text-purple-400 hover:text-red-700 max-lg:text-xs lg:text-sm"
+                    className="text-red-500 hover:text-red-700 max-lg:text-xs lg:text-sm"
                    
                   >
                    DELETE
