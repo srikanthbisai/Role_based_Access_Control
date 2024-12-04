@@ -51,6 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {        
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={toggleSidebar} 
               className={({ isActive }) => `
                 block py-3 px-4 rounded-xl transition duration-300 group
                 ${isActive 
