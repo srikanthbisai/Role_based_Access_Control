@@ -199,8 +199,6 @@ const User: React.FC = () => {
       <Dialog
         open={deleteUserId !== null}
         onClose={closeDeleteConfirmation}
-        aria-labelledby="delete-user-dialog-title"
-        aria-describedby="delete-user-dialog-description"
       >
         <DialogTitle id="delete-user-dialog-title">
           Delete User
