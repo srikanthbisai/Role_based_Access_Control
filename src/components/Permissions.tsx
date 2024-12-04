@@ -95,7 +95,12 @@ const Permissions = () => {
           <Button onClick={handleCancelDelete} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleConfirmDelete} color="error" autoFocus>
+          <Button onClick={handleConfirmDelete}
+           variant="contained"
+           color="error"
+           className="bg-red-600 hover:bg-red-700 text-white"
+           autoFocus
+           >
             Delete
           </Button>
         </DialogActions>
@@ -104,7 +109,7 @@ const Permissions = () => {
       {/* Toast Container */}
       <ToastContainer 
         position="top-right"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
