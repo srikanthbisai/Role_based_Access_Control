@@ -166,7 +166,12 @@ const Roles: React.FC = () => {
           <Button onClick={cancelDeleteRole} color="primary">
             Cancel
           </Button>
-          <Button onClick={confirmDeleteRole} color="secondary" autoFocus>
+          <Button onClick={confirmDeleteRole}  
+            variant="contained"
+            color="error"
+            className="bg-red-600 hover:bg-red-700 text-white"
+            autoFocus
+          >
             Delete
           </Button>
         </DialogActions>
