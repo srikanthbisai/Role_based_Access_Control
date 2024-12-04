@@ -91,16 +91,16 @@ npm install -g json-server
 
 Start the Json Server
 
-Start the server:  replace it with the port number you like
+Start the server:
 ```bash
-json-server --watch db.json --port 8000
+ npm start
 ```
 
-The backend will run at
+The backend will run at by default 
 ```bash
- http://localhost:8000
+ http://localhost:3000 
 ```
-
+You will get 3 endpoints users , permissions, roles to fetch data respective data. 
 
 📦 Dependencies
 Key dependencies include:
