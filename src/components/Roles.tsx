@@ -71,7 +71,7 @@ const Roles: React.FC = () => {
                     variant="contained"
                     color="primary"
                     size="small"
-                    className="text-purple-400 hover:text-blue-700"
+                    className="text-purple-400 hover:bg-blue-700"
                   >
                     Edit
                   </Button>
@@ -82,7 +82,7 @@ const Roles: React.FC = () => {
                     variant="contained"
                     color="error"
                     size="small"
-                    className="text-purple-400 hover:text-blue-700"
+                    className="text-purple-400 hover:bg-red-700"
                   >
                     Delete
                   </Button>
