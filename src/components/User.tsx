@@ -103,7 +103,7 @@ const User: React.FC = () => {
           <thead>
             <tr className="bg-gray-100">
               <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg">Name</th>
-              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden md:table-cell">
+              <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden lg:table-cell">
                 Email
               </th>
               <th className="py-4 px-2 text-left max-lg:text-md lg:text-lg hidden md:table-cell">
@@ -126,7 +126,7 @@ const User: React.FC = () => {
                 <td className="py-4 px-2 font-medium text-gray-800 max-sm:text-xs">
                   {user.name}
                 </td>
-                <td className="py-3 px-2 text-gray-600 hidden md:table-cell">
+                <td className="py-3 px-2 text-gray-600 hidden lg:table-cell">
                   {user.email}
                 </td>
                 <td className="py-3 px-2 text-gray-600 hidden md:table-cell">
